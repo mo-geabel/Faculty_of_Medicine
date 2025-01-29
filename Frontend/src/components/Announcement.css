@@ -1,0 +1,158 @@
+.an-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+.right-bar {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: fit-content;
+}
+.ann,
+.chh {
+  height: fit-content;
+  box-shadow: 1px 3px 2px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  padding-bottom: 10px;
+  padding: 20px;
+  font-size: 25px;
+  margin-bottom: 200px;
+}
+.left-bar {
+  background-color: white;
+  height: fit-content;
+  width: 20%;
+}
+.ann h2,
+h5,
+.chh h2,
+h5 {
+  color: #1369ce;
+  margin-top: 10px;
+}
+.an,
+.ach {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.256);
+  margin-bottom: 10px;
+}
+.contents h5 {
+  color: #1369ce;
+}
+.contents h5:hover {
+  color: #000000;
+}
+#date {
+  font-weight: 500;
+}
+.contents {
+  margin: 20px;
+  transition: box-shadow 0.3s ease;
+  padding: 10px;
+  cursor: pointer;
+}
+.add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  margin: 20px auto;
+}
+
+.add h5 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.nbt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.nbt label {
+  font-size: 14px;
+  color: #555;
+}
+
+.nbt input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #007bff;
+  cursor: pointer;
+}
+
+.nbt label,
+.nbt input {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  vertical-align: middle;
+}
+.contents:hover {
+  box-shadow: 1px 1px 7px 1px rgba(0, 0, 0, 0.3); /* Adjusted shadow for better visibility */
+}
+.an h2,
+.ach h2 {
+  color: #1369ce;
+  margin: 20px;
+  font-weight: 700;
+}
+textarea {
+  border: none;
+  background-color: rgba(183, 183, 183, 0.275);
+  padding: 5px;
+}
+textarea:focus {
+  border: none;
+  outline: none;
+}
+input[type="radio"] {
+  margin: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .an-container {
+    flex-direction: column; /* Stack the bars vertically on tablets */
+  }
+  .right-bar,
+  .left-bar {
+    width: 100%; /* Full width for both bars */
+  }
+  .ann,
+  .chh {
+    margin-bottom: 50px; /* Reduce margin for smaller screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ann,
+  .chh {
+    font-size: 20px; /* Smaller font size for mobile devices */
+  }
+
+  .contents {
+    margin: 10px; /* Reduce margin for contents */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .ann h2,
+  .ach h2 {
+    font-size: 18px; /* Further reduce title size */
+  }
+
+  .contents h5 {
+    font-size: 16px; /* Adjust size for announcement titles */
+  }
+
+  textarea {
+    font-size: 14px; /* Adjust font size for textareas */
+  }
+}

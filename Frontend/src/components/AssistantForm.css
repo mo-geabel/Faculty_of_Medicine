@@ -1,0 +1,83 @@
+.add-form {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.add-title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: px;
+  margin-top: 20px;
+  color: #1369ce;
+  font-size: 20px;
+}
+.custom-input {
+  padding: 5px;
+  margin: 10px;
+  border: none;
+  background-color: rgba(183, 183, 183, 0.275);
+  padding: 5px;
+}
+.custom-input:hover,
+.custom-input:focus {
+  border: none;
+  outline: none;
+}
+
+.add-form button {
+  border: none;
+  padding: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: aliceblue;
+  background-color: #1369ce;
+  border-radius: 10px;
+  transition: ease-in-out 0.3s;
+}
+.add-form button:hover {
+  transform: scale(1.1);
+}
+.input[type="text"] {
+  padding: 5px;
+  margin: 10px;
+  border: none;
+  background-color: rgba(183, 183, 183, 0.275);
+  padding: 5px;
+}
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .add-form {
+    width: 90%; /* Adjust width for tablets */
+    margin: auto; /* Center the form */
+  }
+
+  .add-title {
+    font-size: 18px; /* Slightly smaller title on smaller screens */
+  }
+
+  .custom-input {
+    font-size: 16px; /* Increase font size for better readability */
+  }
+
+  .add-form button {
+    font-size: 16px; /* Increase button font size */
+  }
+}
+
+@media (max-width: 480px) {
+  .add-form {
+    width: 95%; /* Further increase width for mobile devices */
+  }
+
+  .add-title {
+    font-size: 16px; /* Smaller title for very small screens */
+  }
+
+  .custom-input {
+    padding: 10px; /* Increase padding for better touch targets */
+  }
+
+  .add-form button {
+    padding: 12px; /* Increase button padding */
+  }
+}

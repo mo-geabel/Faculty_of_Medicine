@@ -1,0 +1,16 @@
+.carousel-inner img {
+  height: 800px;
+  filter: brightness(0.5);
+}
+@media (max-width: 768px) {
+  .carousel-inner img {
+    height: 600px; /* Adjust height for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-inner img {
+    height: 400px; /* Further adjust height for mobile devices */
+    filter: brightness(0.7); /* Slightly reduce brightness on mobile */
+  }
+}

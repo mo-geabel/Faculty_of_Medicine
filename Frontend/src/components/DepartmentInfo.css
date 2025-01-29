@@ -1,0 +1,150 @@
+.Department-container {
+  margin-top: 200px;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  margin-left: 20px;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  background-color: white;
+  padding: 20px;
+}
+.item1 {
+  margin: 20px;
+}
+.item1 h5,
+#pf-name {
+  color: #1369ce;
+  font-size: 28px;
+}
+.item1 p,
+li {
+  font-size: 20px;
+}
+#pf-postion {
+  font-weight: 700;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  background-color: white;
+  height: fit-content;
+  box-shadow: 1px -1px 0px 1px rgba(0, 0, 0, 0.1);
+}
+.info,
+#info {
+  padding: 5px;
+  margin: 10px;
+}
+.underline {
+  text-decoration: none;
+  color: #1369ce;
+  cursor: pointer;
+}
+.underline-em {
+  text-decoration: none;
+  color: #ce132f;
+  cursor: pointer;
+}
+.underline:hover {
+  text-decoration: underline;
+}
+.underline-em:hover {
+  text-decoration: underline;
+  color: #ce132f;
+}
+.card-pf {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.296);
+  margin-top: 20px;
+}
+
+.line-style-btn {
+  border: 2px solid #1369ce; /* Border color */
+  background-color: transparent; /* Transparent background */
+  color: #1369ce; /* Text color */
+  padding: 10px 20px; /* Padding */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 16px; /* Font size */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  margin-bottom: 10px; /* Margin at the bottom */
+}
+
+.line-style-btn:hover {
+  background-color: #1369ce; /* Change background to blue on hover */
+  color: white; /* Change text color to white */
+}
+
+@media screen and (max-width: 1024px) {
+  .Department-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .right,
+  .left {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .left {
+    width: 100%;
+    box-shadow: none;
+  }
+
+  .item1 h5 {
+    font-size: 24px;
+  }
+
+  .item1 p,
+  li {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Department-container {
+    margin-top: 100px;
+  }
+
+  .item1 h5 {
+    font-size: 22px;
+  }
+
+  .item1 p,
+  li {
+    font-size: 16px;
+  }
+
+  #pf-name {
+    font-size: 24px;
+  }
+
+  #pf-postion {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .item1 h5 {
+    font-size: 20px;
+  }
+
+  .item1 p,
+  li {
+    font-size: 14px;
+  }
+
+  .Department-container {
+    margin-left: 0;
+    padding: 0 10px;
+  }
+
+  .left {
+    padding: 10px;
+  }
+}

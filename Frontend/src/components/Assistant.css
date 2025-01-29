@@ -1,0 +1,248 @@
+.assistant-container {
+  display: flex;
+  max-width: 100%;
+  margin: 20px;
+  margin-top: 200px;
+  justify-content: space-between;
+}
+
+.assistant {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  padding: 20px;
+  align-items: center;
+  height: fit-content;
+  background-color: white;
+}
+.assistant-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  color: #1369ce;
+  text-transform: capitalize;
+}
+.assistant-list {
+  display: flex;
+  max-width: 100%;
+  height: fit-content;
+  flex-wrap: wrap;
+  align-content: start;
+  justify-content: left;
+}
+.assistant-card {
+  background-color: white;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+}
+.assistant-card p {
+  font-weight: 500;
+  padding: 5px;
+}
+.add-assistant p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  color: #1369ce;
+  margin: 20px;
+}
+.assistant-card button {
+  border: none;
+  padding: 7px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: aliceblue;
+  background-color: #1369ce;
+  border-radius: 10px;
+  transition: ease-in-out 0.3s;
+}
+.assistant-card button:hover {
+  transform: scale(1.1);
+}
+.L-bar {
+  width: 300px;
+  margin: 50px;
+  background-color: white;
+  height: fit-content;
+}
+.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 0.1px rgba(0, 0, 0, 0.1) solid;
+  width: 200px;
+}
+.search-title {
+  margin-bottom: 20px;
+  color: #1369ce;
+  font-size: 20px;
+}
+
+.search input {
+  border: none;
+  background-color: rgba(183, 183, 183, 0.275);
+  padding: 5px;
+  width: 10px;
+}
+.search input:hover,
+.search input:focus {
+  border: none;
+  outline: none;
+}
+
+.car-button {
+  display: flex;
+  justify-content: space-between;
+  gap: 7px;
+}
+.calnder_container {
+  margin: 20px;
+  padding: 3px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.calnder_container1 {
+  margin: 20px;
+  padding: 3px;
+  width: 1000px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  align-items: center;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.calnder h2 {
+  width: fit-content;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  color: #1369ce;
+}
+
+.shift-details {
+  width: 450px;
+  margin: 30px;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+}
+.shift-details h3 {
+  color: #1369ce;
+}
+.shifts {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.calnder_container {
+  margin: 20px auto; /* Center the container horizontally */
+  padding: 3px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calnder_container1 {
+  margin: 20px auto;
+  padding: 20px;
+  width: fit-content;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.react-calendar {
+  border: none;
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.react-calendar__tile {
+  padding: 10px;
+  margin: 3px;
+  background: #f7f9fc;
+  color: #000000;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile--active {
+  background-color: #212222; /* Highlight color */
+  color: #030303; /* White text for contrast */
+  font-weight: bold;
+}
+
+.shift-indicator {
+  color: #000000; /* Match theme color */
+  font-size: 0.9em;
+  text-align: center;
+}
+.react-calendar__navigation__arrow.react-calendar__navigation__arrow--prev,
+.react-calendar__navigation__arrow.react-calendar__navigation__arrow--next {
+  color: black; /* Change arrow color to black */
+}
+
+.react-calendar__navigation__label {
+  color: black; /* Change month name color to black */
+}
+.react-calendar__navigation button {
+  color: black; /* Change the color of the arrows to black */
+}
+#L-Calendar {
+  display: flex;
+  text-decoration: none;
+  text-underline-offset: none;
+  margin-top: 20px;
+  text-align: center;
+  margin-left: 20px;
+  padding: 20px;
+  border-bottom: #00000018 1px solid;
+}
+@media (max-width: 768px) {
+  .assistant-container {
+    flex-direction: column; /* Stack the elements vertically */
+    align-items: center; /* Center align the content */
+    margin: 10px; /* Reduce margin */
+  }
+
+  .L-bar {
+    flex-direction: column;
+    width: 90%; /* Full width for sidebar */
+    margin: 20px 0; /* Add margin for spacing */
+  }
+
+  .assistant-title {
+    font-size: 18px; /* Smaller title font size */
+  }
+
+  .assistant-card {
+    width: 90%; /* Full width for assistant cards */
+    margin: 10px 0; /* Add margin for spacing */
+  }
+
+  .assistant-card button {
+    width: 30%; /* Full width buttons */
+    padding: 10px; /* Increase padding for better touch targets */
+  }
+
+  .calnder_container1 {
+    width: 100%; /* Full width for calendar container */
+    margin-top: 20px; /* Spacing above the calendar */
+  }
+
+  .calnder {
+    width: 100%; /* Full width calendar */
+  }
+}
