@@ -36,7 +36,7 @@ const Assistant = ({ userRole, setAssistants }) => {
   // }, [assistants]);
 
   const fetchdata = async () => {
-    const response = await fetch("/api/assistant/");
+    const response = await fetch(`${import.meta.env.VITE_URL}/assistant`);
     const data = await response.json();
     console.log(data);
     dispatch({ type: "GET_Assistants", payload: data });
@@ -56,10 +56,13 @@ const Assistant = ({ userRole, setAssistants }) => {
   };
 
   const Delete = async (id) => {
-    const response = await fetch(`/api/assistant/${id}`, {
-      method: "DELETE",
-      headers: { authorization: `Bearer ${User.token}` },
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/assistant/${id}`,
+      {
+        method: "DELETE",
+        headers: { authorization: `Bearer ${User.token}` },
+      }
+    );
     if (!response) {
       return console.log("there is an err in deleting");
     }
@@ -82,7 +85,7 @@ const Assistant = ({ userRole, setAssistants }) => {
     setCurrentAssistant(assistant); // Set the current assistant to edit
   };
   const addAssistant = async (newAssistant) => {
-    const response = await fetch(`/api/assistant/`, {
+    const response = await fetch(`${import.meta.env.VITE_URL}/assistant/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",
@@ -188,14 +191,17 @@ const Assistant = ({ userRole, setAssistants }) => {
       : setNightShifts(shiftsForDate);
   };
   const updateAssistant = async (updatedAssistant) => {
-    const response = await fetch(`/api/assistant/${currentAssistant._id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-        authorization: `Bearer ${User.token}`,
-      },
-      body: JSON.stringify(updatedAssistant),
-    });
+    const response = await fetch(
+      `${import.meta.env.VITE_URL}/assistant/${currentAssistant._id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          authorization: `Bearer ${User.token}`,
+        },
+        body: JSON.stringify(updatedAssistant),
+      }
+    );
     const data = await response.json();
     if (!response.ok) {
       return console.log(data.error);

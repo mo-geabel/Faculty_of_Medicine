@@ -56,13 +56,16 @@ const Nav = ({ setUserRole, userRole }) => {
 
       const decoded = jwtDecode(User.token);
 
-      const response = await fetch(`/api/assistant/${decoded._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/assistant/${decoded._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password: newPassword }),
+        }
+      );
       dispatch({
         type: "UPDATE_Assistants",
         payload: {
@@ -75,13 +78,16 @@ const Nav = ({ setUserRole, userRole }) => {
       // Update in Members array
       const decoded = jwtDecode(User.token);
 
-      const response = await fetch(`/api/Members/${decoded._id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ password: newPassword }),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/Members/${decoded._id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ password: newPassword }),
+        }
+      );
       dispatch({
         type: "UPDATE_Members",
         payload: {

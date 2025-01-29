@@ -14,7 +14,7 @@ const Login = ({ setUserRole, assistants, Members, setActiveUser }) => {
   const handleLogin = async () => {
     try {
       // Send login request to the server
-      const response = await fetch(`/api/login/`, {
+      const response = await fetch(`${import.meta.env.VITE_URL}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

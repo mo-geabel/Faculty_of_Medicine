@@ -19,7 +19,7 @@ const Cal = ({ assistants, userRole, setAssistants }) => {
   });
 
   const fetchdata = async () => {
-    const response = await fetch("/api/assistant/");
+    const response = await fetch(`${import.meta.env.VITE_URL}/assistant`);
     const data = await response.json();
     dispatch({ type: "GET_Assistants", payload: data });
   };
@@ -61,14 +61,17 @@ const Cal = ({ assistants, userRole, setAssistants }) => {
     };
 
     try {
-      const response = await fetch(`/api/assistant/addshift/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${User.token}`,
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/assistant/addshift`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${User.token}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
       if (!response.ok) {
         console.error("Error: Could not add shift. Server returned an error.");
@@ -175,14 +178,17 @@ const Cal = ({ assistants, userRole, setAssistants }) => {
 
     try {
       // Make the DELETE request with the assistantId in the body
-      const response = await fetch(`/api/assistant/deleteshift/${_id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${User.token}`,
-        },
-        body: JSON.stringify({ assistantId }), // Wrap assistantId in an object
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/assistant/deleteshift/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${User.token}`,
+          },
+          body: JSON.stringify({ assistantId }), // Wrap assistantId in an object
+        }
+      );
 
       // Check if the response is OK
       if (!response.ok) {

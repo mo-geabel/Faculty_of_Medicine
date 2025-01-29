@@ -10,7 +10,7 @@ const Emergency = ({ userRole }) => {
   const { User } = useLoginhook();
   const fetchdata = async () => {
     try {
-      const response = await fetch("/api/emergency");
+      const response = await fetch(`${import.meta.env.VITE_URL}/emergency`);
       const data = await response.json();
       console.log(data);
       dispatch({ type: "GET_EMERGENCY", payload: data });
@@ -49,7 +49,7 @@ const Emergency = ({ userRole }) => {
       return;
     }
     if (isEditing) {
-      await fetch(`/api/emergency/${currentCaseId}`, {
+      await fetch(`${import.meta.env.VITE_URL}/emergency/${currentCaseId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -69,7 +69,7 @@ const Emergency = ({ userRole }) => {
       setCurrentCaseId(null);
       // fetchdata();
     } else {
-      await fetch(`/api/emergency`, {
+      await fetch(`${import.meta.env.VITE_URL}/emergency`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json;charset=utf-8",
@@ -105,7 +105,7 @@ const Emergency = ({ userRole }) => {
       "Are you sure you want to delete this case?"
     );
     if (isConfirmed) {
-      await fetch(`/api/emergency/${id}`, {
+      await fetch(`${import.meta.env.VITE_URL}/emergency/${id}`, {
         method: "DELETE",
         headers: { authorization: `Bearer ${User.token}` },
       });

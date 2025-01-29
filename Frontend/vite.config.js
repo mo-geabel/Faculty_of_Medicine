@@ -9,9 +9,9 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "http://localhost:4000", // Your backend server
-        changeOrigin: true, // Change the origin header to match the target
-        secure: false, // If backend is using self-signed SSL, disable secure checking
-        rewrite: (path) => path.replace(/^\/api/, ""), // Rewrite /api to match the backend paths
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, ""), // Remove the `/api` prefix
       },
     },
   },

@@ -17,7 +17,7 @@ const Announcement = ({ userRole }) => {
   // console.log(announcements[0].blog[0].title);
   const fetchAnnouncements = async () => {
     try {
-      const response = await fetch("http://localhost:4000/announcement/");
+      const response = await fetch(`${import.meta.env.VITE_URL}/announcement/`);
       const data = await response.json();
       if (!response.ok) {
         return console.log(data.error);
@@ -34,7 +34,7 @@ const Announcement = ({ userRole }) => {
   }, [disAnnouncement]);
   const fetchAchievement = async () => {
     try {
-      const response = await fetch("http://localhost:4000/achievement/");
+      const response = await fetch(`${import.meta.env.VITE_URL}/achievement/`);
       const data = await response.json();
       if (!response.ok) {
         return console.log(data.error);
@@ -80,14 +80,17 @@ const Announcement = ({ userRole }) => {
 
   const submitAnnouncement = async () => {
     try {
-      const response = await fetch("http://localhost:4000/announcement/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${User.token}`,
-        },
-        body: JSON.stringify(newAnnouncement),
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/announcement/`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${User.token}`,
+          },
+          body: JSON.stringify(newAnnouncement),
+        }
+      );
 
       if (response.ok) {
         disAnnouncement({
@@ -112,7 +115,7 @@ const Announcement = ({ userRole }) => {
   const deleteAnnouncement = async (_id) => {
     try {
       const response = await fetch(
-        `http://localhost:4000/announcement/${_id}`,
+        `${import.meta.env.VITE_URL}/announcement/${_id}`,
         {
           method: "DELETE",
           headers: { authorization: `Bearer ${User.token}` },
@@ -130,10 +133,13 @@ const Announcement = ({ userRole }) => {
 
   const deleteAchievement = async (_id) => {
     try {
-      const response = await fetch(`http://localhost:4000/achievement/${_id}`, {
-        method: "DELETE",
-        headers: { authorization: `Bearer ${User.token}` },
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_URL}/achievement/${_id}`,
+        {
+          method: "DELETE",
+          headers: { authorization: `Bearer ${User.token}` },
+        }
+      );
 
       if (response.ok) {
         disAchievement({ type: "DELETE_ACHIEVEMENT", payload: _id });
@@ -146,7 +152,7 @@ const Announcement = ({ userRole }) => {
 
   const submitAchievement = async () => {
     try {
-      const response = await fetch("http://localhost:4000/achievement/", {
+      const response = await fetch(`${import.meta.env.VITE_URL}/achievement/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

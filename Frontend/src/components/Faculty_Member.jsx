@@ -11,7 +11,7 @@ const Faculty_Member = () => {
   const { Members, dispatch } = useMemberhook();
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("/api/Members/");
+      const response = await fetch(`${import.meta.env.VITE_URL}/Members`);
       const data = await response.json();
       console.log(data);
       dispatch({ type: "GET_Members", payload: data });

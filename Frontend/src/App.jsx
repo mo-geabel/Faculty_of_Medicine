@@ -48,7 +48,9 @@ function App() {
   useEffect(() => {
     const fetchAnnouncements = async () => {
       try {
-        const response = await fetch("/api/announcement/");
+        const response = await fetch(
+          `${import.meta.env.VITE_URL}/announcement`
+        );
         const data = await response.json();
         disAnnouncment({ type: "GET_ANNOUNCEMENTS", payload: data.data });
         localStorage.setItem("announcements", JSON.stringify(data.data));
@@ -59,7 +61,9 @@ function App() {
 
     const fetchAchievements = async () => {
       try {
-        const response = await fetch("/api/achievement/");
+        const response = await fetch(
+          `${import.meta.env.VITE_URL}/achievement/`
+        );
         const data = await response.json();
         disAchievement({ type: "GET_ACHIEVEMENTS", payload: data.data });
         localStorage.setItem("achievements", JSON.stringify(data.data));
@@ -83,7 +87,7 @@ function App() {
   useEffect(() => {
     const fetchAssistants = async () => {
       try {
-        const response = await fetch("/api/assistant/");
+        const response = await fetch(`${import.meta.env.VITE_URL}/assistant`);
         const data = await response.json();
         disAssistant({ type: "GET_Assistants", payload: data });
       } catch (error) {
