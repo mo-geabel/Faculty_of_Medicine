@@ -195,8 +195,8 @@ const Announcement = ({ userRole }) => {
           <div className="ann">
             <h2>
               <h2>
-                {achievements?.[selectedAchievementIndex]?.blog?.[0]?.title ||
-                  "No achievements available"}
+                {announcements?.[selectedAnnouncementIndex]?.blog?.[0]?.title ||
+                  "No Announcements available"}
               </h2>
             </h2>
             <span id="date">
@@ -204,7 +204,7 @@ const Announcement = ({ userRole }) => {
             </span>
             <p>
               {announcements[selectedAnnouncementIndex]?.blog[0]?.excerpt ||
-                "No achievements available"}
+                "No description available"}
             </p>
           </div>
         )}

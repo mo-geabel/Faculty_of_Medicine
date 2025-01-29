@@ -82,6 +82,7 @@ body {
   transform: scale(1.1);
 }
 .add-form input {
+  width: auto;
   padding: 5px;
   margin: 10px;
   border: none;

@@ -85,7 +85,7 @@ const Assistant = ({ userRole, setAssistants }) => {
     setCurrentAssistant(assistant); // Set the current assistant to edit
   };
   const addAssistant = async (newAssistant) => {
-    const response = await fetch(`${import.meta.env.VITE_URL}/assistant/`, {
+    const response = await fetch(`${import.meta.env.VITE_URL}/assistant`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json;charset=utf-8",

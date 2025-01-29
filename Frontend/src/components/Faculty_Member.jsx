@@ -57,7 +57,7 @@ const Faculty_Member = () => {
             {filtered.map((Member) => (
               <div key={Member._id} className="card">
                 <div key={Member.id} className="card-details">
-                  <img src={Member.img} alt="" />
+                  <img src={a_logo} alt="" />
                   <p>Name: {Member.name}</p>
                   <p>Department: {Member.department}</p>
                   <p>Title: {Member.title}</p>

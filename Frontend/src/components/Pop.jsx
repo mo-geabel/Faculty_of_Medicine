@@ -1,6 +1,7 @@
 import React from "react";
 import "./Pop.css"; // Import your CSS styles
 import { format } from "date-fns"; // Import date-fns to format the dates
+import a_logo from "../../public/assets/a_logo.png";
 
 const Pop = ({ isOpen, onClose, assistant }) => {
   if (!isOpen) return null; // Don't render the Pop if it's not open
@@ -16,7 +17,7 @@ const Pop = ({ isOpen, onClose, assistant }) => {
         <button className="close-button" onClick={onClose}>
           X
         </button>
-        <img src={assistant.img} alt={assistant.name} />
+        <img src={a_logo} alt={assistant.name} />
         <h2>{assistant.name}</h2>
 
         <p>

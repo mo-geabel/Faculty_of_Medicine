@@ -175,7 +175,7 @@ const Emergency = ({ userRole }) => {
               required
             />
             <input
-              type="text"
+              type="number"
               name="age"
               value={newEmergencyCase.age}
               onChange={handleChange}
@@ -188,6 +188,7 @@ const Emergency = ({ userRole }) => {
               value={newEmergencyCase.gender}
               onChange={handleChange}
               placeholder="Gender"
+              style={{ width: "auto" }}
               required
             />
             <input
