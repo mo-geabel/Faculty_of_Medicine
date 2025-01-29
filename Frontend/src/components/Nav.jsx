@@ -49,11 +49,6 @@ const Nav = ({ setUserRole, userRole }) => {
     // Update in assistants array
     if (userRole === 1) {
       const decoded = jwtDecode(User.token);
-      const updatedAssistants = Assistant.map((assistant) =>
-        assistant._id === decoded._id
-          ? { ...assistant, password: newPassword }
-          : assistant
-      );
 
       const response = await fetch(
         `${import.meta.env.VITE_URL}/assistant/${decoded._id}`,
