@@ -26,7 +26,6 @@ npm run dev
 🔑 Login Credentials
 
 👨‍⚕️ Assistant Account
-
 Email: mohamedgabel1@gmail.com
 Password: Bngeabel098)(*
 
