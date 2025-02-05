@@ -9,35 +9,54 @@ import AssistantRouter from "./Routers/AssistantRouter.js";
 import LoginRouter from "./Routers/UserRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
+
 dotenv.config();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 const app = express();
-app.use(cors());
+
+// Enable CORS
+const corsOptions = {
+  origin: "*",
+  methods: "GET,POST,PUT,DELETE",
+  allowedHeaders: "Content-Type, Authorization"
+};
+app.use(cors(corsOptions));
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Debugging: Log incoming requests
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  console.log(`Incoming request: ${req.method} ${req.url}`);
   next();
 });
+
+// Routes
 app.use("/", router);
 app.use("/emergency", EmergencyRouter);
-app.use("/Members", MembersRouter);
+app.use("/members", MembersRouter);
 app.use("/assistant", AssistantRouter);
 app.use("/login", LoginRouter);
-const P = process.env.PORT || 4000;
+
+// MongoDB Connection
+const PORT = process.env.PORT || 5000;
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => {
-    console.log("Connected to MongoDB");
-    app.listen(P, () => {
-      console.log(`Server started on http://localhost:${P}`);
+    console.log("✅ Connected to MongoDB");
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
     });
   })
   .catch((error) => {
-    console.log(error.reason);
+    console.error("❌ MongoDB connection error:", error);
   });
 
+// Serve frontend static files
 app.use(express.static(path.join(__dirname, "../Frontend/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
