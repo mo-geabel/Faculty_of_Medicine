@@ -27,7 +27,7 @@ app.use("/assistant", AssistantRouter);
 app.use("/login", LoginRouter);
 const P = process.env.PORT || 4000;
 mongoose
-  .connect(process.env.MONGODB_UR)
+  .connect(process.env.MONGODB_URL)
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(P, () => {
