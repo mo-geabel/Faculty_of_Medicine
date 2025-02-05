@@ -25,11 +25,12 @@ app.use("/emergency", EmergencyRouter);
 app.use("/Members", MembersRouter);
 app.use("/assistant", AssistantRouter);
 app.use("/login", LoginRouter);
+const PORT = process.env.PORT || 4000;
 mongoose
-  .connect(process.env.MONGODB_URL)
+  .connect(process.env.MONGODB_UR)
   .then(() => {
     console.log("Connected to MongoDB");
-    app.listen(process.env.PORT, () => {
+    app.listen(PORT, () => {
       console.log(`Server started on http://localhost:${process.env.PORT}`);
     });
   })
