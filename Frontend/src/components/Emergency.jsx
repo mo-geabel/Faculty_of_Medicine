@@ -22,7 +22,7 @@ const Emergency = ({ userRole }) => {
     fetchdata();
   }, [dispatch]);
 
-  const emergencyStatus = Emergency.length;
+  const emergencyStatus = Array.isArray(Emergency) ? Emergency.length : 0;
   const beds = 20 - emergencyStatus;
 
   const [isEditing, setIsEditing] = useState(false);
@@ -125,7 +125,7 @@ const Emergency = ({ userRole }) => {
           <p>Available beds</p>
         </div>
         <div className="ite1">
-          <img id="img" src={eme} alt="Emergency" />
+          <img id="img" src={emergency} alt="Emergency" />
           <p id="status">
             <CountUp start={0} end={emergencyStatus} duration={2.5} />
           </p>
@@ -134,7 +134,7 @@ const Emergency = ({ userRole }) => {
       </div>
       <div className="midpage">
         <div className="cases">
-          {Emergency
+          {Array.isArray(Emergency) && Emergency.length > 0
             ? Emergency.map((cases) => (
                 <div key={cases._id} className="case">
                   <h5>Name: {cases.name}</h5>
