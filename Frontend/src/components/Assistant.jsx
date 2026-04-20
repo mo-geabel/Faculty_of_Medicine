@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Hero from "./Hero";
 import "./Assistant.css";
-import assistant_photo from "../../public/assets/assistant_hero.jpg";
+import assistant_photo from "../assets/assistant_hero.jpg";
 import Pop from "./Pop";
-import a_logo from "../../public/assets/a_logo.png";
+import a_logo from "../assets/a_logo.png";
 import AssistantForm from "./AssistantForm";
 import { Link } from "react-router-dom";
 import useAssistanthook from "../../hook/useAssistanthook";

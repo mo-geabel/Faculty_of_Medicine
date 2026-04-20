@@ -1,11 +1,11 @@
 import React from "react";
 import "./Intro.css";
-import Homepage_photo from "../../public/assets/Hero1.jpg";
-import members from "../../public/assets/members.avif";
+import Homepage_photo from "../assets/Hero1.jpg";
+import members from "../assets/members.avif";
 import Hero from "./Hero";
-import intro from "../../public/assets/Intro.jpg";
+import intro from "../assets/Intro.jpg";
 import { Link } from "react-router-dom";
-import About from "../../public/assets/About.jpg";
+import About from "../assets/About.jpg";
 import Blank from "./Blank";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 import "./Home.css";

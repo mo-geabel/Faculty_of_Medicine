@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import About from "../../public/assets/About.jpg";
+import About from "../assets/About.jpg";
 import Hero from "./Hero";
-import a_logo from "../../public/assets/a_logo.png";
+import a_logo from "../assets/a_logo.png";
 import { Link } from "react-router-dom";
 import "./DepartmentInfo.css";
 import Popup from "./Popup";

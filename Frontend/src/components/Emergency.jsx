@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CountUp from "react-countup";
-import bed from "../../public/assets/hospital-bed.png";
-import eme from "../../public/assets/emergency.png";
+import emergency from "../assets/emergency.png";
+import bed from "../assets/hospital-bed.png";
 import "./Emergency.css";
 import useEmergencyhook from "../../hook/useEmergencyhook";
 import useLoginhook from "../../hook/useLoginhook";

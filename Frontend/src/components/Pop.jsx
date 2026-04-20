@@ -1,7 +1,7 @@
 import React from "react";
 import "./Pop.css"; // Import your CSS styles
 import { format } from "date-fns"; // Import date-fns to format the dates
-import a_logo from "../../public/assets/a_logo.png";
+import a_logo from "../assets/a_logo.png";
 
 const Pop = ({ isOpen, onClose, assistant }) => {
   if (!isOpen) return null; // Don't render the Pop if it's not open

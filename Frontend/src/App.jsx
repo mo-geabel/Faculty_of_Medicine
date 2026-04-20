@@ -17,16 +17,16 @@ import Login from "./components/Login";
 import Cal from "./components/Cal";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Homepage_photo from "../public/assets/Hero1.jpg";
-import assistant_photo from "../public/assets/assistant_hero.jpg";
-import Achiev from "../public/assets/Acheivment.jpg";
-import a_logo from "../public/assets/a_logo.png";
+import Homepage_photo from "./assets/Hero1.jpg";
+import assistant_photo from "./assets/assistant_hero.jpg";
+import Achiev from "./assets/Acheivment.jpg";
+import a_logo from "./assets/a_logo.png";
 
 import "react-calendar/dist/Calendar.css";
-import useAnnouncmentContexthook from "../hook/useAnnouncementhook";
-import useAchievementhook from "../hook/useAchievementhook";
-import useLoginhook from "../hook/useLoginhook";
-import useAssistanthook from "../hook/useAssistanthook";
+import useAnnouncmentContexthook from "./hook/useAnnouncementhook";
+import useAchievementhook from "./hook/useAchievementhook";
+import useLoginhook from "./hook/useLoginhook";
+import useAssistanthook from "./hook/useAssistanthook";
 
 function App() {
   const { User, dispatch: disUser } = useLoginhook();

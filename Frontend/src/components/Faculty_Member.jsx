@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Pop from "./Pop";
-import a_logo from "../../public/assets/a_logo.png";
+import a_logo from "../assets/a_logo.png";
 import "./Faculty_Member.css";
-import members from "../../public/assets/members.avif";
+import members from "../assets/members.avif";
 import Hero from "./Hero";
 import useMemberhook from "../../hook/useMemberhook";
 const Faculty_Member = () => {
