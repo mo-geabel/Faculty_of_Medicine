@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import { AnnouncementProvider } from "./context/AnnouncmentContext";
+import { AnnouncementProvider } from "./context/AnnouncementContext";
 import { AchievementProvider } from "./context/AchievementContext";
 import { EmergencyContextProvider } from "./context/EmergencyContext";
 import { MembersContextProvider } from "./context/Membercontext";

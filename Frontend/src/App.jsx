@@ -23,7 +23,7 @@ import Achiev from "./assets/acheivment.jpg";
 import a_logo from "./assets/a_logo.png";
 
 import "react-calendar/dist/Calendar.css";
-import useAnnouncmentContexthook from "./hook/useAnnouncementhook";
+import useAnnouncementContexthook from "./hook/useAnnouncementhook";
 import useAchievementhook from "./hook/useAchievementhook";
 import useLoginhook from "./hook/useLoginhook";
 import useAssistanthook from "./hook/useAssistanthook";
@@ -31,8 +31,8 @@ import useAssistanthook from "./hook/useAssistanthook";
 function App() {
   const { User, dispatch: disUser } = useLoginhook();
   const { Assistant, dispatch: disAssistant } = useAssistanthook();
-  const { announcements, dispatch: disAnnouncment } =
-    useAnnouncmentContexthook();
+  const { announcements, dispatch: disAnnouncement } =
+    useAnnouncementContexthook();
   const { achievements, dispatch: disAchievement } = useAchievementhook();
 
   const [userRole, setUserRole] = useState(null);
@@ -52,7 +52,7 @@ function App() {
           `${import.meta.env.VITE_URL}/announcement`
         );
         const data = await response.json();
-        disAnnouncment({ type: "GET_ANNOUNCEMENTS", payload: data.data });
+        disAnnouncement({ type: "GET_ANNOUNCEMENTS", payload: data.data });
         localStorage.setItem("announcements", JSON.stringify(data.data));
       } catch (error) {
         console.error("Error fetching announcements:", error);
@@ -74,7 +74,7 @@ function App() {
 
     fetchAnnouncements();
     fetchAchievements();
-  }, [disAnnouncment, disAchievement]);
+  }, [disAnnouncement, disAchievement]);
 
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("user"));
