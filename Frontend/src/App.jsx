@@ -17,9 +17,9 @@ import Login from "./components/Login";
 import Cal from "./components/Cal";
 import ScrollToTop from "./components/ScrollToTop";
 
-import Homepage_photo from "./assets/Hero1.jpg";
+import Homepage_photo from "./assets/hero1.jpg";
 import assistant_photo from "./assets/assistant_hero.jpg";
-import Achiev from "./assets/Acheivment.jpg";
+import Achiev from "./assets/acheivment.jpg";
 import a_logo from "./assets/a_logo.png";
 
 import "react-calendar/dist/Calendar.css";
