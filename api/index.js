@@ -2,11 +2,11 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import router from "./Routers/AnnouncementRouter.js";
-import EmergencyRouter from "./Routers/EmergencyRouter.js";
-import MembersRouter from "./Routers/MemberRoutes.js";
-import AssistantRouter from "./Routers/AssistantRouter.js";
-import LoginRouter from "./Routers/UserRouter.js";
+import router from "./_lib/Routers/AnnouncementRouter.js";
+import EmergencyRouter from "./_lib/Routers/EmergencyRouter.js";
+import MembersRouter from "./_lib/Routers/MemberRoutes.js";
+import AssistantRouter from "./_lib/Routers/AssistantRouter.js";
+import LoginRouter from "./_lib/Routers/UserRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
