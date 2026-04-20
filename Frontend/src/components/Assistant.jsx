@@ -6,8 +6,8 @@ import Pop from "./Pop";
 import a_logo from "../assets/a_logo.png";
 import AssistantForm from "./AssistantForm";
 import { Link } from "react-router-dom";
-import useAssistanthook from "../../hook/useAssistanthook";
-import useLoginhook from "../../hook/useLoginhook";
+import useAssistanthook from "../hook/useAssistanthook";
+import useLoginhook from "../hook/useLoginhook";
 
 const Assistant = ({ userRole, setAssistants }) => {
   const [searchTerm, setSearchTerm] = useState("");

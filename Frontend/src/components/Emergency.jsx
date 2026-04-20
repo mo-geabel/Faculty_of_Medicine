@@ -3,8 +3,8 @@ import CountUp from "react-countup";
 import emergency from "../assets/emergency.png";
 import bed from "../assets/hospital-bed.png";
 import "./Emergency.css";
-import useEmergencyhook from "../../hook/useEmergencyhook";
-import useLoginhook from "../../hook/useLoginhook";
+import useEmergencyhook from "../hook/useEmergencyhook";
+import useLoginhook from "../hook/useLoginhook";
 const Emergency = ({ userRole }) => {
   const { Emergency, dispatch } = useEmergencyhook();
   const { User } = useLoginhook();

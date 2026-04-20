@@ -4,8 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Cal.css";
 import { useNavigate } from "react-router-dom";
-import useAssistanthook from "../../hook/useAssistanthook";
-import useLoginhook from "../../hook/useLoginhook";
+import useAssistanthook from "../hook/useAssistanthook";
+import useLoginhook from "../hook/useLoginhook";
 const Cal = ({ assistants, userRole, setAssistants }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedShifts, setSelectedShifts] = useState([]);

@@ -3,9 +3,9 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import menu from "../assets//menu-icon.png";
 import "./Nav.css";
-import useMemberhook from "../../hook/useMemberhook";
-import useLoginhook from "../../hook/useLoginhook";
-import useAssistanthook from "../../hook/useAssistanthook";
+import useMemberhook from "../hook/useMemberhook";
+import useLoginhook from "../hook/useLoginhook";
+import useAssistanthook from "../hook/useAssistanthook";
 import { jwtDecode } from "jwt-decode";
 
 const Nav = ({ setUserRole, userRole }) => {

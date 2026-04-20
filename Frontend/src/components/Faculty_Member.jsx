@@ -4,7 +4,7 @@ import a_logo from "../assets/a_logo.png";
 import "./Faculty_Member.css";
 import members from "../assets/members.avif";
 import Hero from "./Hero";
-import useMemberhook from "../../hook/useMemberhook";
+import useMemberhook from "../hook/useMemberhook";
 const Faculty_Member = () => {
   const [open, setopen] = useState(false);
   const [selected, setselected] = useState(null);

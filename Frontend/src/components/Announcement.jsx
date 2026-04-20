@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Announcement.css";
-import useAnnouncementContextHook from "../../hook/useAnnouncementHook";
-import useAchievementhook from "../../hook/useAchievementhook";
-import useLoginhook from "../../hook/useLoginhook";
+import useAnnouncementContextHook from "../hook/useAnnouncementHook";
+import useAchievementhook from "../hook/useAchievementhook";
+import useLoginhook from "../hook/useLoginhook";
 
 const Announcement = ({ userRole }) => {
   const [selectedAchievementIndex, setSelectedAchievementIndex] = useState(0);
