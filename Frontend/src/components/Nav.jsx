@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
-import menu from "../assets//menu-icon.png";
+import menu from "../assets/menu-icon.png";
 import "./Nav.css";
 import useMemberhook from "../hook/useMemberhook";
 import useLoginhook from "../hook/useLoginhook";
