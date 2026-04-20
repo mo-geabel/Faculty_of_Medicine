@@ -36,6 +36,7 @@ const postLogin = async (req, res) => {
 
     // Respond with the token, user details, and role
     res.status(200).json({
+      name: user.name,
       email: user.email,
       role: userRole, // Include the role in the response
       token: token,

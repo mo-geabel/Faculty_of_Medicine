@@ -1,114 +1,281 @@
-/* Default styles */
-.con {
+/* Premium Intro Section Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.home_wrapper {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+/* Common Layout Utilities */
+.section_padding {
+  padding: 100px 0;
+}
+
+.section_container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.flex_layout {
   display: flex;
-  justify-content: space-evenly;
-}
-.left_item {
-  width: 70%;
-  background-color: white;
-  height: fit-content;
-  border-radius: 20px;
-}
-.right_b {
-  width: 20%;
-  margin-top: 20px;
-}
-.ite {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.238);
-  margin-top: 40px;
-  height: fit-content;
+  gap: 60px;
 }
-.ite img {
-  width: 400px;
+
+.alt_bg {
+  background-color: #f8fbff;
+}
+
+.centered {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+/* Typography */
+.section_title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #1a2b4b;
+  margin-bottom: 25px;
+  letter-spacing: -1px;
+}
+
+.section_text {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #4a5568;
+  margin-bottom: 30px;
+}
+
+/* Section 1: Intro */
+.text_content {
+  flex: 1;
+}
+
+.image_content {
+  flex: 1;
+}
+
+.rounded_image {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.rounded_image:hover {
+  transform: translateY(-10px);
+}
+
+.premium_link {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #1369ce;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.premium_link:hover {
+  background: #0b5ab3;
+  box-shadow: 0 4px 15px rgba(19, 105, 206, 0.3);
+}
+
+/* Section 2: Pillars Grid */
+.pillars_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.pillar_card {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.pillar_card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.pillar_img img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.pillar_info {
+  padding: 30px;
+}
+
+.pillar_info h3 {
+  font-size: 20px;
+  color: #1a2b4b;
+  margin-bottom: 15px;
+}
+
+.pillar_info p {
+  color: #718096;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.pillar_info a {
+  color: #1369ce;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Section 3: Clinical Pulse (Glass Dashboard) */
+.dashboard_section {
+  background: linear-gradient(135deg, #1369ce 0%, #0a3264 100%);
+  color: #fff;
+}
+
+.glass_panel {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 50px;
+}
+
+.dashboard_header {
+  margin-bottom: 40px;
+}
+
+.dashboard_header .section_title {
+  color: #fff;
+  margin-bottom: 5px;
+}
+
+.dashboard_header p {
+  opacity: 0.8;
+}
+
+.dashboard_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+}
+
+.update_box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
   border-radius: 20px;
 }
-#titl {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  color: #1369ce;
-}
-.titl {
+
+.box_header {
   display: flex;
   justify-content: space-between;
-  background-color: rgba(128, 128, 128, 0.1);
-  padding: 10px;
+  align-items: center;
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 15px;
 }
-.it-1 {
-  border-radius: 20px;
-  background-color: white;
-  padding: 20px;
-  margin-bottom: 80px;
-  height: fit-content;
+
+.box_header h3 {
+  font-size: 18px;
+  font-weight: 700;
 }
-#link {
-  outline: none;
+
+.box_header a {
+  color: #fff;
+  opacity: 0.6;
+  font-size: 12px;
   text-decoration: none;
-  margin-top: 3px;
+  text-transform: uppercase;
 }
-#link:hover {
-  text-decoration: underline;
-  color: #136aceb6;
+
+.update_item {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
 }
-#stitl {
-  font-size: 20px;
-  color: #1369ce;
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #38b2ac;
+  border-radius: 50%;
+  margin-top: 6px;
 }
-#rlink {
-  outline: none;
+
+.star {
+  color: #f6e05e;
+}
+
+.update_item h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.update_item p {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* Section 4: Emergency Banner */
+.emergency_banner {
+  background: #fff3f3;
+  text-align: center;
+  padding: 80px 0;
+}
+
+.emergency_content h2 {
+  color: #e53e3e;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.emergency_content p {
+  font-size: 18px;
+  color: #718096;
+  margin-bottom: 30px;
+}
+
+.emergency_btn {
+  display: inline-block;
+  padding: 15px 35px;
+  background: #e53e3e;
+  color: #fff;
   text-decoration: none;
-  margin-top: 3px;
-  color: red;
-}
-#rlink:hover {
-  text-decoration: underline;
-  color: #ce132fb6;
-}
-#rtitl {
-  font-size: 20px;
-  color: #ce1313;
+  font-weight: 700;
+  border-radius: 50px;
+  transition: all 0.3s ease;
 }
 
-/* Media Queries */
-@media (max-width: 992px) {
-  .con {
+.emergency_btn:hover {
+  background: #c53030;
+  transform: scale(1.05);
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 992px) {
+  .flex_layout {
     flex-direction: column;
-    align-items: center;
-  }
-  .left_item,
-  .right_b {
-    width: 90%;
-  }
-  .ite img {
-    width: 300px;
-  }
-}
-
-@media (max-width: 768px) {
-  .left_item,
-  .right_b {
-    width: 100%;
-  }
-  .ite img {
-    width: 250px;
-  }
-}
-
-@media (max-width: 576px) {
-  #stitl,
-  #rtitl {
-    font-size: 18px;
-  }
-  .titl {
-    flex-direction: column;
-    align-items: center;
     text-align: center;
   }
-  .it-1 {
-    margin-bottom: 40px;
+  
+  .section_padding {
+    padding: 60px 0;
+  }
+  
+  .dashboard_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .glass_panel {
+    padding: 30px 20px;
   }
 }

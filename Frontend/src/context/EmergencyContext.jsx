@@ -6,7 +6,10 @@ export const EmergencyContextProvider = ({ children }) => {
   const EmergencyReducer = (state, action) => {
     switch (action.type) {
       case "GET_EMERGENCY":
-        return { ...state, Emergency: action.payload };
+        return {
+          ...state,
+          Emergency: Array.isArray(action.payload) ? action.payload : [],
+        };
       case "CREATE_EMERGENCY":
         return {
           ...state,

@@ -1,210 +1,362 @@
-.calendar_container {
-  display: flex;
-  justify-content: space-evenly;
+:root {
+  --commander-primary: #1369ce;
+  --commander-bg: #f8fafc;
+  --commander-slate: #1a2b4b;
+  --commander-glass: rgba(255, 255, 255, 0.85);
+  --commander-border: rgba(19, 105, 206, 0.1);
+  --commander-text: #1a2b4b;
+  --commander-text-light: #64748b;
 }
-.calendar_section {
-  margin-top: 200px;
-  padding: 20px;
+
+/* Page Wrapper */
+.schedule_commander_page {
+  background-color: var(--commander-bg);
+  min-height: 100vh;
+  padding-top: 100px;
+}
+
+.commander_workspace {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 40px;
+  padding: 40px;
+}
+
+/* 1. LEFT PANE: CALENDAR */
+.calendar_pane {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-  height: fit-content;
-  width: 600px;
-}
-.calendar .calendars {
-  display: flex;
-}
-.shifts {
-  margin-top: 20px;
-}
-#Night {
-  color: rgba(255, 0, 0, 0.775);
-}
-#Morning {
-  color: #1369ce;
-}
-.shifts-details {
-  width: 200px;
-  display: flex;
-  flex-direction: column;
-}
-.calendar1 {
-  background-color: white;
+  gap: 40px;
 }
 
-/* Add Shift Form Styles */
-.add-shift-form {
-  max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.glass_calendar_wrapper {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
-.add-shift-form h3 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  color: #333;
+.calendar_header {
+  margin-bottom: 30px;
 }
 
-.add-shift-form label {
-  display: block;
-  margin-bottom: 12px;
-  font-size: 1rem;
-  color: #555;
+.commander_tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--commander-primary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
 }
 
-.add-shift-form select,
-.add-shift-form button,
-.add-shift-form input {
-  width: 100%;
-  padding: 10px;
-  margin-top: 8px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
+.commander_title {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--commander-text);
 }
 
-.add-shift-form select:focus,
-.add-shift-form button:focus,
-.add-shift-form input:focus {
-  outline: none;
-  border-color: #5cb85c;
-}
-
-.add-shift-form button {
-  background-color: #1369ce;
-  color: white;
+/* React Calendar Custom Styling */
+.react-calendar.commander_calendar {
+  width: 100% !important;
   border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-family: inherit;
+  background: transparent;
 }
 
-.add-shift-form button:hover {
-  background-color: #0c4a92;
+.react-calendar__navigation {
+  margin-bottom: 20px;
+  height: 50px;
 }
-.D-butt {
-  background-color: red;
-  border-radius: 20px;
+
+.react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--commander-text);
+  border-radius: 12px;
 }
-/* Reset the DatePicker navigation (arrows) to default styles */
-.react-datepicker__header {
-  background-color: #1369ce; /* Retain your custom background */
-  color: white; /* Text color for month/year */
-  padding: 10px;
-  border-radius: 10px 10px 0 0;
+
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  background-color: #f1f5f9;
+}
+
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 11px;
+  color: var(--commander-text-light);
+  margin-bottom: 15px;
+}
+
+.react-calendar__tile {
+  padding: 25px 5px !important;
+  background: none;
+  text-align: center;
+  line-height: 16px;
+  font-weight: 700;
+  color: var(--commander-slate); /* Explicitly set visible color */
+  border-radius: 16px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile--active {
+  background: var(--commander-primary) !important;
+  color: white !important;
+  box-shadow: 0 10px 20px rgba(19, 105, 206, 0.2);
+}
+
+.react-calendar__tile--now {
+  background: rgba(19, 105, 206, 0.05);
+  border: 2px solid var(--commander-primary) !important;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #cbd5e1 !important; /* Visible light gray for neighboring months */
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #ef4444; /* Standard weekend visibility */
+}
+
+.react-calendar__tile--active.react-calendar__month-view__days__day--weekend {
+  color: white !important; /* Keep active white even on weekends */
+}
+
+/* Shift Indicator on Tiles */
+.shift-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 50%;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* 2. RIGHT PANE: DUTY PANEL */
+.duty_panel {
+  background: white;
+  border-radius: 30px;
+  padding: 35px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  height: calc(100vh - 180px);
+  position: sticky;
+  top: 140px;
   display: flex;
   flex-direction: column;
+}
+
+.panel_sticky_header {
+  margin-bottom: 30px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.duty_date {
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--commander-text-light);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.panel_title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--commander-text);
+}
+
+.duty_list_scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+/* Duty Card UI */
+.duty_glass_card {
+  background: #f8fafc;
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+  transition: all 0.3s ease;
+}
+
+.duty_glass_card:hover {
+  background: white;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  border-color: var(--commander-primary);
+}
+
+.duty_card_header {
+  display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 15px;
 }
 
-/* Default arrows - no extra styling */
-.react-datepicker__navigation {
-  background: none; /* Remove any custom background */
-  border: none; /* Remove custom borders */
-  color: #fff; /* Set default color */
-  font-size: 16px; /* Default font size for the arrows */
-  padding: 0; /* Remove extra padding */
-  border-radius: none; /* No rounded corners */
-  cursor: pointer; /* Pointer cursor */
+.duty_dept_badge {
+  font-size: 10px;
+  font-weight: 800;
+  color: var(--commander-primary);
+  background: rgba(19, 105, 206, 0.06);
+  padding: 4px 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
 }
 
-/* Arrows' hover effect */
-.react-datepicker__navigation:hover {
-  background-color: transparent; /* No hover effect */
-}
-
-/* Specific styles for previous and next buttons */
-.react-datepicker__navigation--previous,
-.react-datepicker__navigation--next {
-  font-size: 16px; /* Set arrow size back to default */
-}
-/* Focus effect for arrows (optional) */
-.react-datepicker__navigation:focus {
-  outline: none;
-}
-
-.add-shift-form select,
-.add-shift-form button,
-.add-shift-form input {
-  width: auto;
-  padding: 10px;
-  margin-top: 2px;
-  border-radius: 0px;
-  font-size: 1rem;
-}
-
-/* Style for date picker input */
-.add-shift-form input[type="date"] {
-  width: 25%; /* Slightly wider for better date display */
-  padding: 8px;
-  margin-top: 8px;
-  border-radius: 4px;
-  border: 1px solid #999;
-  font-size: 1rem;
-  color: #555; /* Neutral color for text */
-  background-color: #f9f9f9; /* Light background for contrast */
+.duty_delete_btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 14px;
   cursor: pointer;
+  opacity: 0.3;
+  transition: all 0.2s;
 }
 
-/* Optional: Add focus effect for the date picker */
-.add-shift-form input[type="date"]:focus {
-  outline: none;
-  border-color: #007bff; /* Highlight with a primary blue color */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Subtle shadow for focus */
+.duty_delete_btn:hover {
+  opacity: 1;
+  transform: scale(1.2);
 }
 
-/* Media Queries for Responsive Design */
-@media (max-width: 768px) {
-  .add-shift-form {
-    padding: 15px;
-    margin: 10px;
-  }
-
-  .add-shift-form h3 {
-    font-size: 1.2rem;
-  }
-
-  .add-shift-form label {
-    font-size: 0.9rem;
-  }
-
-  .add-shift-form select,
-  .add-shift-form button,
-  .add-shift-form input {
-    font-size: 0.9rem;
-    padding: 8px;
-  }
+.assistant_name {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--commander-text);
+  margin-bottom: 15px;
 }
 
-@media (max-width: 480px) {
-  .add-shift-form {
-    padding: 10px;
-    margin: 5px;
-  }
+.duty_timing {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid #f1f5f9;
+}
 
-  .add-shift-form h3 {
-    font-size: 1rem;
-  }
+.time_block {
+  display: flex;
+  flex-direction: column;
+}
 
-  .add-shift-form label {
-    font-size: 0.8rem;
-  }
+.time_label {
+  font-size: 9px;
+  font-weight: 800;
+  color: var(--commander-text-light);
+  margin-bottom: 2px;
+}
 
-  .add-shift-form select,
-  .add-shift-form button,
-  .add-shift-form input {
-    font-size: 0.8rem;
-    padding: 6px;
-  }
+.time_value {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--commander-text);
+}
 
-  .add-shift-form button {
-    font-size: 0.9rem;
-    padding: 8px;
+.time_divider {
+  width: 1px;
+  height: 20px;
+  background: #e2e8f0;
+}
+
+/* 3. ADMIN WORKSPACE */
+.admin_shift_workspace {
+  background: white;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+}
+
+.workspace_header {
+  margin-bottom: 30px;
+}
+
+.workspace_header h3 {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.workspace_header p {
+  font-size: 13px;
+  color: var(--commander-text-light);
+}
+
+.admin_duty_form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form_group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--commander-text-light);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.admin_duty_form select, 
+.duty_datepicker {
+  width: 100% !important;
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+  border: 1px solid #edf2f7 !important;
+  background: #f8fafc !important;
+  font-size: 14px !important;
+  color: var(--commander-text) !important;
+  font-family: inherit !important;
+  transition: all 0.3s;
+}
+
+.push_duty_btn {
+  margin-top: 10px;
+  padding: 16px;
+  border-radius: 14px;
+  background: var(--commander-slate);
+  color: white;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.push_duty_btn:hover {
+  background: var(--commander-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(19, 105, 206, 0.2);
+}
+
+/* Empty State */
+.empty_duty_state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--commander-text-light);
+}
+
+/* Responsive */
+@media (max-width: 1000px) {
+  .commander_workspace {
+    grid-template-columns: 1fr;
+  }
+  .duty_panel {
+    height: auto;
+    position: static;
   }
 }

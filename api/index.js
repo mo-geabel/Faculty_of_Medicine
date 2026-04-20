@@ -7,6 +7,7 @@ import EmergencyRouter from "./_lib/Routers/EmergencyRouter.js";
 import MembersRouter from "./_lib/Routers/MemberRoutes.js";
 import AssistantRouter from "./_lib/Routers/AssistantRouter.js";
 import LoginRouter from "./_lib/Routers/UserRouter.js";
+import QuizResultRouter from "./_lib/Routers/QuizResultRouter.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -79,6 +80,7 @@ app.use("/api/emergency", EmergencyRouter);
 app.use("/api/members", MembersRouter);
 app.use("/api/assistant", AssistantRouter);
 app.use("/api/login", LoginRouter);
+app.use("/api/quiz-results", QuizResultRouter);
 
 // Local server (only if not on Vercel)
 if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {

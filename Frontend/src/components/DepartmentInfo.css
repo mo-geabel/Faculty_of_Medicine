@@ -1,150 +1,285 @@
-.Department-container {
-  margin-top: 200px;
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  margin-left: 20px;
+/* Premium Department Info Styling */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+.info_page {
+  font-family: 'Inter', sans-serif;
+  background-color: #fff;
+  overflow-x: hidden;
 }
-.right {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  background-color: white;
-  padding: 20px;
+
+.section_padding {
+  padding: 100px 0;
 }
-.item1 {
-  margin: 20px;
+
+.section_container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.item1 h5,
-#pf-name {
+
+.alt_bg {
+  background-color: #f8fbff;
+}
+
+.centered {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.section_title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #1a2b4b;
+  margin-bottom: 25px;
+  letter-spacing: -1px;
+}
+
+/* Section 1: Vision Glass Panel */
+.glass_inner_panel {
+  background: rgba(19, 105, 206, 0.03);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(19, 105, 206, 0.1);
+  border-radius: 30px;
+  padding: 60px;
+  text-align: center;
+}
+
+.panel_header h2 {
+  font-size: 36px;
   color: #1369ce;
-  font-size: 28px;
+  margin-bottom: 10px;
 }
-.item1 p,
-li {
-  font-size: 20px;
-}
-#pf-postion {
+
+.subtitle_text {
+  font-size: 14px;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 2px;
   font-weight: 700;
+  margin-bottom: 30px;
 }
-.left {
+
+.main_intro_text {
+  font-size: 20px;
+  line-height: 1.8;
+  color: #4a5568;
+  max-width: 800px;
+  margin: 0 auto 40px;
+}
+
+.premium_action_btn {
+  padding: 14px 32px;
+  background: #1369ce;
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.premium_action_btn:hover {
+  background: #0b5ab3;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(19, 105, 206, 0.3);
+}
+
+/* Section 2: Info Grid */
+.info_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.info_card {
+  background: #fff;
+  padding: 40px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.info_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+.card_icon {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.info_card h3 {
+  font-size: 20px;
+  color: #1a2b4b;
+  margin-bottom: 15px;
+}
+
+.info_card p {
+  color: #718096;
+  line-height: 1.6;
+}
+
+/* Section 3: Leadership Cards */
+.leadership_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+}
+
+.leader_card {
   display: flex;
-  flex-direction: column;
-  width: 20%;
-  background-color: white;
-  height: fit-content;
-  box-shadow: 1px -1px 0px 1px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  padding: 30px;
+  border-radius: 24px;
+  gap: 30px;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
 }
-.info,
-#info {
-  padding: 5px;
-  margin: 10px;
+
+.leader_card:hover {
+  transform: scale(1.02);
 }
-.underline {
-  text-decoration: none;
+
+.leader_avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #f0f4f8;
+}
+
+.leader_avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.leader_info h3 {
+  font-size: 18px;
+  color: #1a2b4b;
+  margin-bottom: 5px;
+}
+
+.leader_rank {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
   color: #1369ce;
-  cursor: pointer;
+  margin-bottom: 15px;
+  text-transform: uppercase;
 }
-.underline-em {
+
+.leader_details_btn {
+  padding: 8px 20px;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  border-radius: 8px;
+  color: #1369ce;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.leader_details_btn:hover {
+  background: #1369ce;
+  color: #fff;
+}
+
+/* Section 4: Dept Explorer */
+.dept_button_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.dept_explorer_btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 25px;
+  background: #fff;
+  border: 1px solid rgba(19, 105, 206, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dept_explorer_btn:hover {
+  background: #1369ce;
+  border-color: #1369ce;
+  transform: translateX(5px);
+}
+
+.dept_name {
+  font-weight: 600;
+  color: #1a2b4b;
+  font-size: 15px;
+  transition: color 0.3s ease;
+}
+
+.dept_arrow {
+  color: #1369ce;
+  transition: all 0.3s ease;
+}
+
+.dept_explorer_btn:hover .dept_name,
+.dept_explorer_btn:hover .dept_arrow {
+  color: #fff;
+}
+
+/* Section 5: Links Bar */
+.links_action_bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  padding: 50px;
+  background: #1a2b4b;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.action_item h4 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+.action_item a,
+.underline_link {
+  color: #fff;
   text-decoration: none;
-  color: #ce132f;
-  cursor: pointer;
-}
-.underline:hover {
-  text-decoration: underline;
-}
-.underline-em:hover {
-  text-decoration: underline;
-  color: #ce132f;
-}
-.card-pf {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.296);
-  margin-top: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  transition: all 0.3s ease;
 }
 
-.line-style-btn {
-  border: 2px solid #1369ce; /* Border color */
-  background-color: transparent; /* Transparent background */
-  color: #1369ce; /* Text color */
-  padding: 10px 20px; /* Padding */
-  border-radius: 20px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  font-size: 16px; /* Font size */
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-  margin-bottom: 10px; /* Margin at the bottom */
+.action_item a:hover {
+  color: #53a2fd;
+  transform: translateX(5px);
 }
 
-.line-style-btn:hover {
-  background-color: #1369ce; /* Change background to blue on hover */
-  color: white; /* Change text color to white */
+.action_item.emergency a {
+  color: #ff6b6b;
 }
 
-@media screen and (max-width: 1024px) {
-  .Department-container {
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .glass_inner_panel {
+    padding: 30px 20px;
+  }
+  
+  .leader_card {
     flex-direction: column;
-    align-items: center;
+    text-align: center;
   }
-
-  .right,
-  .left {
-    width: 100%;
-    margin: 10px 0;
-  }
-
-  .left {
-    width: 100%;
-    box-shadow: none;
-  }
-
-  .item1 h5 {
-    font-size: 24px;
-  }
-
-  .item1 p,
-  li {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .Department-container {
-    margin-top: 100px;
-  }
-
-  .item1 h5 {
-    font-size: 22px;
-  }
-
-  .item1 p,
-  li {
-    font-size: 16px;
-  }
-
-  #pf-name {
-    font-size: 24px;
-  }
-
-  #pf-postion {
-    font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .item1 h5 {
-    font-size: 20px;
-  }
-
-  .item1 p,
-  li {
-    font-size: 14px;
-  }
-
-  .Department-container {
-    margin-left: 0;
-    padding: 0 10px;
-  }
-
-  .left {
-    padding: 10px;
+  
+  .links_action_bar {
+    text-align: center;
   }
 }

@@ -30,6 +30,7 @@ const Login = ({ setUserRole, assistants, Members, setActiveUser }) => {
 
       // Prepare user object from the response
       const user = {
+        name: data.name,
         email: data.email,
         token: data.token,
         role: data.role,
@@ -70,54 +71,57 @@ const Login = ({ setUserRole, assistants, Members, setActiveUser }) => {
 
   return (
     <div className="login_cont">
-      <div className="login">
-        <div className="lg">
-          <img src={logo} alt="logo" />
+      <div className="login_overlay"></div>
+      <div className="glass_card">
+        <div className="login_header">
+          <div className="lg">
+            <img src={logo} alt="Faculty Logo" />
+          </div>
+          <h1>Welcome Back</h1>
+          <p>Please enter your credentials to access the Medical Portal</p>
         </div>
-        <div className="f_input">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setemail(e.target.value)}
-          />
+
+        <div className="login_form">
+          <div className="f_input">
+            <label>Email Address</label>
+            <input
+              type="email"
+              placeholder="e.g. name@faculty.edu"
+              value={email}
+              onChange={(e) => setemail(e.target.value)}
+            />
+          </div>
+          <div className="f_input">
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button className="login_btn" onClick={handleLogin}>
+            Sign In
+          </button>
+
+          {loginError && <p className="error_msg">{loginError}</p>}
+
+          <div className="login_footer">
+            <Link to="/" className="visitor_link">
+              Continue as Visitor
+            </Link>
+          </div>
         </div>
-        <div className="f_input">
-          <label>Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button
-          style={{
-            background: "#1369ce",
-            color: "white",
-            cursor: "pointer",
-            transition: "background-color 0.3s",
-            width: "270px",
-            margin: "5px",
-            borderRadius: "10px",
-          }}
-          onClick={handleLogin}
-        >
-          Login
-        </button>
-        {loginError && <p className="error">{loginError}</p>}
-        <div className="f_input">
-          <Link to="/">
-            <p>Or continue as a visitor</p>
-          </Link>
-        </div>
+
         {userRole !== null && (
-          <p>
+          <div className="role_badge">
             {userRole === 0
-              ? "Logged in as Faculty Member (0)"
+              ? "Logged in as Faculty Member"
               : userRole === 1
-              ? "Logged in as Assistant (1)"
-              : "Guest (2)"}
-          </p>
+              ? "Logged in as Assistant"
+              : "Guest Access"}
+          </div>
         )}
       </div>
     </div>

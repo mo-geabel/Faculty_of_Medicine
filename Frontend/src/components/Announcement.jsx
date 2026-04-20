@@ -67,6 +67,16 @@ const Announcement = ({ userRole }) => {
     blog: { title: "", excerpt: "" },
   });
 
+  const departmentList = [
+    "Pediatric Intensive Care",
+    "Pediatric Hematology and Oncology",
+    "Emergency",
+    "Pediatrics",
+    "Cardiology",
+    "Neurology",
+    "Orthopedics"
+  ];
+
   const handleRadioChange = (type) => setIsActive(type === "achievement");
 
   const handleInputChange = (e, setState, nestedKey) => {
@@ -80,6 +90,15 @@ const Announcement = ({ userRole }) => {
 
   const submitAnnouncement = async () => {
     try {
+      // Prepare payload to match schema: blog must be an array, and whole request must be an array for insertMany
+      const announcementToSubmit = {
+        ...newAnnouncement,
+        blog: [{ 
+          title: newAnnouncement.title, 
+          excerpt: newAnnouncement.content.slice(0, 150) + "..." 
+        }]
+      };
+
       const response = await fetch(
         `${import.meta.env.VITE_URL}/announcement/`,
         {
@@ -88,14 +107,14 @@ const Announcement = ({ userRole }) => {
             "Content-Type": "application/json",
             authorization: `Bearer ${User.token}`,
           },
-          body: JSON.stringify(newAnnouncement),
+          body: JSON.stringify([announcementToSubmit]), // Wrap in array for insertMany
         }
       );
 
       if (response.ok) {
         disAnnouncement({
           type: "CREATE_ANNOUNCEMENT",
-          payload: newAnnouncement,
+          payload: announcementToSubmit,
         });
         setNewAnnouncement({
           id: null,
@@ -106,6 +125,10 @@ const Announcement = ({ userRole }) => {
           blog: { title: "", excerpt: "" },
         });
         fetchAnnouncements();
+      } else {
+        const errorData = await response.json();
+        console.error("Server Error:", errorData);
+        alert("Failed to create announcement: " + (errorData.message || errorData.error));
       }
     } catch (error) {
       console.error("Error creating announcement:", error);
@@ -152,17 +175,26 @@ const Announcement = ({ userRole }) => {
 
   const submitAchievement = async () => {
     try {
+      // Prepare payload to match schema
+      const achievementToSubmit = {
+        ...newAchievement,
+        blog: [{ 
+          title: newAchievement.title, 
+          excerpt: newAchievement.description.slice(0, 150) + "..." 
+        }]
+      };
+
       const response = await fetch(`${import.meta.env.VITE_URL}/achievement/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           authorization: `Bearer ${User.token}`,
         },
-        body: JSON.stringify(newAchievement),
+        body: JSON.stringify([achievementToSubmit]), // Wrap in array for insertMany
       });
 
       if (response.ok) {
-        disAchievement({ type: "CREATE_ACHIEVEMENT", payload: newAchievement });
+        disAchievement({ type: "CREATE_ACHIEVEMENT", payload: achievementToSubmit });
         setNewAchievement({
           id: null,
           title: "",
@@ -171,6 +203,10 @@ const Announcement = ({ userRole }) => {
           blog: { title: "", excerpt: "" },
         });
         fetchAchievement();
+      } else {
+        const errorData = await response.json();
+        console.error("Server Error:", errorData);
+        alert("Failed to create achievement: " + (errorData.message || errorData.error));
       }
     } catch (error) {
       console.error("Error creating achivement:", error);
@@ -189,223 +225,152 @@ const Announcement = ({ userRole }) => {
   };
 
   return (
-    <div ref={refann} className="an-container">
-      <div className="right-bar">
-        {announcements && (
-          <div className="ann">
-            <h2>
-              <h2>
-                {announcements?.[selectedAnnouncementIndex]?.blog?.[0]?.title ||
-                  "No Announcements available"}
-              </h2>
-            </h2>
-            <span id="date">
-              {announcements[selectedAnnouncementIndex]?.date}
-            </span>
-            <p>
-              {announcements[selectedAnnouncementIndex]?.blog[0]?.excerpt ||
-                "No description available"}
-            </p>
-          </div>
-        )}
-        <div ref={refach} className="chh">
-          <h2>
-            {achievements?.[selectedAchievementIndex]?.blog?.[0]?.title ||
-              "No achievements available"}
-          </h2>
-          <span id="date">
-            {achievements?.[selectedAchievementIndex]?.date ||
-              "No date available"}
-          </span>
-          <p>
-            {achievements?.[selectedAchievementIndex]?.blog?.[0]?.excerpt ||
-              "No description available"}
-          </p>
-        </div>
-
-        {userRole === 0 && (
-          <div className="add">
-            <h5>Add</h5>
-            <div className="nbt">
-              <label htmlFor="announcement">Announcement</label>
-              <input
+    <div className="pulse_workspace">
+      <div className="workspace_layout">
+        {/* Master Sidebar (The Feed) */}
+        <aside className="pulse_sidebar">
+          <div className="sidebar_fixed_header">
+            <h2 className="pulse_brand_title">Medical Pulse</h2>
+            <div className="pulse_toggle_switch">
+              <button 
+                className={`pulse_pill ${!isActive ? "active" : ""}`}
                 onClick={() => handleRadioChange("announcement")}
-                type="radio"
-                id="announcement"
-                name="selection"
-                checked={!isActive}
-              />
-              <label htmlFor="achievement">Achievement</label>
-              <input
+              >
+                Announcements
+              </button>
+              <button 
+                className={`pulse_pill ${isActive ? "active" : ""}`}
                 onClick={() => handleRadioChange("achievement")}
-                type="radio"
-                id="achievement"
-                name="selection"
-              />
-            </div>
-            <div className="add-form">
-              {isActive ? (
-                <>
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Achievement Title"
-                    value={newAchievement.title}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAchievement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="date"
-                    placeholder="Achievement Date"
-                    value={newAchievement.date}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAchievement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="description"
-                    placeholder="Achievement Description"
-                    value={newAchievement.description}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAchievement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Blog Title"
-                    value={newAchievement.blog.title}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAchievement, "blog")
-                    }
-                  />
-                  <textarea
-                    name="excerpt"
-                    placeholder="Blog Excerpt"
-                    value={newAchievement.blog.excerpt}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAchievement, "blog")
-                    }
-                  />
-                  <button onClick={submitAchievement}>
-                    Submit Achievement
-                  </button>
-                </>
-              ) : (
-                <>
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Announcement Title"
-                    value={newAnnouncement.title}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="date"
-                    placeholder="Announcement Date"
-                    value={newAnnouncement.date}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="department"
-                    placeholder="Department"
-                    value={newAnnouncement.department}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="content"
-                    placeholder="Content"
-                    value={newAnnouncement.content}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, null)
-                    }
-                  />
-                  <input
-                    type="text"
-                    name="title"
-                    placeholder="Blog Title"
-                    value={newAnnouncement.blog.title}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, "blog")
-                    }
-                  />
-                  <textarea
-                    name="excerpt"
-                    placeholder="Blog Excerpt"
-                    value={newAnnouncement.blog.excerpt}
-                    onChange={(e) =>
-                      handleInputChange(e, setNewAnnouncement, "blog")
-                    }
-                  />
-                  <button onClick={submitAnnouncement}>
-                    Submit Announcement
-                  </button>
-                </>
-              )}
+              >
+                Achievements
+              </button>
             </div>
           </div>
-        )}
-      </div>
-      <div className="left-bar">
-        <div className="an">
-          <h2>Announcements</h2>
-          {announcements?.map((announcement, index) => (
-            <div key={announcement._id} className="contents">
-              <h5
-                onClick={() =>
-                  scrollToElement(refann, index, setSelectedAnnouncementIndex)
-                }
-              >
-                {announcement.title}
-              </h5>
-              <p>{announcement.date}</p>
-              <p>{announcement.department}</p>
-              <p>{announcement.content}</p>
-              {userRole === 0 && (
-                <button onClick={() => deleteAnnouncement(announcement._id)}>
-                  Delete
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="ach">
-          <h2>Achievements</h2>
 
-          {achievements?.map((achievement, index) => (
-            <div key={achievement._id} className="contents">
-              <h5
-                onClick={() =>
-                  scrollToElement(refach, index, setSelectedAchievementIndex)
-                }
-              >
-                {achievement.title}
-              </h5>
-              <p>{achievement.date}</p>
-              <p>{achievement.description}</p>
-              {userRole === 0 && (
-                <button onClick={() => deleteAchievement(achievement._id)}>
-                  Delete
-                </button>
-              )}
+          <div className="sidebar_scroll_feed">
+            {!isActive ? (
+              announcements?.map((item, index) => (
+                <div 
+                  key={item._id} 
+                  className={`pulse_mini_card ${selectedAnnouncementIndex === index ? "active" : ""}`}
+                  onClick={() => scrollToElement(refann, index, setSelectedAnnouncementIndex)}
+                >
+                  <div className="mini_card_meta">
+                    <span className="mini_date">{item.date}</span>
+                    <span className="mini_tag">{item.department}</span>
+                  </div>
+                  <h4 className="mini_card_title">{item.title}</h4>
+                </div>
+              ))
+            ) : (
+              achievements?.map((item, index) => (
+                <div 
+                  key={item._id} 
+                  className={`pulse_mini_card ${selectedAchievementIndex === index ? "active" : ""}`}
+                  onClick={() => scrollToElement(refach, index, setSelectedAchievementIndex)}
+                >
+                  <div className="mini_card_meta">
+                    <span className="mini_date">{item.date}</span>
+                    <span className="mini_award">🏆</span>
+                  </div>
+                  <h4 className="mini_card_title">{item.title}</h4>
+                </div>
+              ))
+            )}
+          </div>
+
+          {userRole === 0 && (
+            <div className="sidebar_admin_footer">
+              <div className="admin_glass_mini_panel">
+                <h5>Post New {isActive ? "Achievement" : "Announcement"}</h5>
+                <div className="mini_form">
+                  <input type="text" name="title" placeholder="Entry Title" value={isActive ? newAchievement.title : newAnnouncement.title} onChange={(e) => handleInputChange(e, isActive ? setNewAchievement : setNewAnnouncement)} />
+                  
+                  {!isActive && (
+                    <select name="department" value={newAnnouncement.department} onChange={(e) => handleInputChange(e, setNewAnnouncement)} className="mini_form_select">
+                      <option value="">Select Department</option>
+                      {departmentList.map(dept => (
+                        <option key={dept} value={dept}>{dept}</option>
+                      ))}
+                    </select>
+                  )}
+
+                  <input type="date" name="date" value={isActive ? newAchievement.date : newAnnouncement.date} onChange={(e) => handleInputChange(e, isActive ? setNewAchievement : setNewAnnouncement)} />
+                  
+                  <textarea 
+                    name={isActive ? "description" : "content"} 
+                    placeholder={isActive ? "Achievement Description..." : "Announcement Content..."} 
+                    value={isActive ? newAchievement.description : newAnnouncement.content} 
+                    onChange={(e) => handleInputChange(e, isActive ? setNewAchievement : setNewAnnouncement)}
+                  />
+
+                  <button className="mini_publish_btn" onClick={isActive ? submitAchievement : submitAnnouncement}>
+                    Push to Pulse
+                  </button>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
+          )}
+        </aside>
+
+        {/* Content Display (The Stage) */}
+        <main className="pulse_reading_stage">
+          <div ref={!isActive ? refann : refach} className="pulse_canvas_box">
+             {!isActive ? (
+               <article className="reading_content animate_fade">
+                 <header className="reading_header">
+                   <div className="reading_meta">
+                     <span className="reading_date">{announcements[selectedAnnouncementIndex]?.date}</span>
+                     <span className="reading_dept">{announcements[selectedAnnouncementIndex]?.department}</span>
+                   </div>
+                   <h1 className="reading_title">
+                     {announcements[selectedAnnouncementIndex]?.blog?.[0]?.title || announcements[selectedAnnouncementIndex]?.title}
+                   </h1>
+                   <div className="reading_divider"></div>
+                 </header>
+                 <div className="reading_body">
+                   <p className="reading_excerpt">
+                     {announcements[selectedAnnouncementIndex]?.blog?.[0]?.excerpt || announcements[selectedAnnouncementIndex]?.content}
+                   </p>
+                   {userRole === 0 && (
+                     <button className="pulse_delete_action" onClick={() => deleteAnnouncement(announcements[selectedAnnouncementIndex]?._id)}>
+                       Remove from Pulse
+                     </button>
+                   )}
+                 </div>
+               </article>
+             ) : (
+               <article className="reading_content animate_fade">
+                 <header className="reading_header">
+                   <div className="reading_meta">
+                     <span className="reading_date">{achievements[selectedAchievementIndex]?.date}</span>
+                     <span className="reading_badge">Academic Excellence</span>
+                   </div>
+                   <h1 className="reading_title">
+                     {achievements[selectedAchievementIndex]?.blog?.[0]?.title || achievements[selectedAchievementIndex]?.title}
+                   </h1>
+                   <div className="reading_divider"></div>
+                 </header>
+                 <div className="reading_body">
+                   <p className="reading_excerpt">
+                     {achievements[selectedAchievementIndex]?.blog?.[0]?.excerpt || achievements[selectedAchievementIndex]?.description}
+                   </p>
+                   {userRole === 0 && (
+                     <button className="pulse_delete_action" onClick={() => deleteAchievement(achievements[selectedAchievementIndex]?._id)}>
+                       Remove Entry
+                     </button>
+                   )}
+                 </div>
+               </article>
+             )}
+          </div>
+        </main>
       </div>
     </div>
   );
 };
+  
+
+
 
 export default Announcement;

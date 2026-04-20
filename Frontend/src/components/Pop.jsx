@@ -12,23 +12,38 @@ const Pop = ({ isOpen, onClose, assistant }) => {
   };
 
   return (
-    <div className="Pop-overlay">
-      <div className="Pop-content">
-        <button className="close-button" onClick={onClose}>
-          X
+    <div className="pop_overlay" onClick={onClose}>
+      <div className="pop_glass_card" onClick={(e) => e.stopPropagation()}>
+        <button className="pop_close_btn" onClick={onClose}>
+          ✕
         </button>
-        <img src={a_logo} alt={assistant.name} />
-        <h2>{assistant.name}</h2>
+        
+        <div className="pop_header">
+          <div className="pop_avatar">
+            <img src={a_logo} alt={assistant.name} />
+          </div>
+          <h2 className="pop_name">{assistant.name}</h2>
+          <p className="pop_tag">Medical Faculty Professional</p>
+        </div>
 
-        <p>
-          <strong>Phone:</strong> {assistant.phone}
-        </p>
-        <p>
-          <strong>Email:</strong> {assistant.email}
-        </p>
-        <p>
-          <strong>Address:</strong> {assistant.address}
-        </p>
+        <div className="pop_body">
+          <div className="pop_info_item">
+            <span className="info_label">Direct Line</span>
+            <p className="info_value">{assistant.phone || "No phone provided"}</p>
+          </div>
+          <div className="pop_info_item">
+            <span className="info_label">Academic Email</span>
+            <p className="info_value">{assistant.email}</p>
+          </div>
+          <div className="pop_info_item">
+            <span className="info_label">Office Address</span>
+            <p className="info_value">{assistant.address || "Main Campus Medical Center"}</p>
+          </div>
+        </div>
+        
+        <div className="pop_footer">
+          <button className="pop_action_btn" onClick={onClose}>Close Profile</button>
+        </div>
       </div>
     </div>
   );

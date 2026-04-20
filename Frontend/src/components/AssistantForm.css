@@ -1,83 +1,102 @@
-.add-form {
-  margin: 10px;
+.scholar_form_workspace {
+  background: transparent;
+}
+
+.scholar_dynamic_form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
-.add-title {
+
+.scholar_form_group {
   display: flex;
-  justify-content: center;
-  margin-bottom: px;
-  margin-top: 20px;
-  color: #1369ce;
-  font-size: 20px;
+  flex-direction: column;
+  gap: 8px;
 }
-.custom-input {
-  padding: 5px;
-  margin: 10px;
-  border: none;
-  background-color: rgba(183, 183, 183, 0.275);
-  padding: 5px;
+
+.scholar_form_row {
+  display: flex;
+  gap: 15px;
 }
-.custom-input:hover,
-.custom-input:focus {
-  border: none;
+
+.scholar_form_row > .scholar_form_group {
+  flex: 1;
+}
+
+.scholar_form_group label {
+  font-size: 11px;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.scholar_input {
+  width: 100%;
+  background: #f8fafc;
+  border: 1px solid #edf2f7;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #1a2b4b;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.scholar_input:focus {
   outline: none;
+  background: white;
+  border-color: #1369ce;
+  box-shadow: 0 4px 12px rgba(19, 105, 206, 0.08);
 }
 
-.add-form button {
-  border: none;
-  padding: 10px;
+.scholar_form_actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-top: 10px;
-  cursor: pointer;
-  color: aliceblue;
-  background-color: #1369ce;
-  border-radius: 10px;
-  transition: ease-in-out 0.3s;
 }
-.add-form button:hover {
-  transform: scale(1.1);
-}
-.input[type="text"] {
-  padding: 5px;
-  margin: 10px;
+
+.scholar_submit_btn {
+  width: 100%;
+  padding: 14px;
+  background: #1a2b4b;
+  color: white;
   border: none;
-  background-color: rgba(183, 183, 183, 0.275);
-  padding: 5px;
-}
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-  .add-form {
-    width: 90%; /* Adjust width for tablets */
-    margin: auto; /* Center the form */
-  }
-
-  .add-title {
-    font-size: 18px; /* Slightly smaller title on smaller screens */
-  }
-
-  .custom-input {
-    font-size: 16px; /* Increase font size for better readability */
-  }
-
-  .add-form button {
-    font-size: 16px; /* Increase button font size */
-  }
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-@media (max-width: 480px) {
-  .add-form {
-    width: 95%; /* Further increase width for mobile devices */
-  }
+.scholar_submit_btn:hover {
+  background: #1369ce;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(19, 105, 206, 0.2);
+}
 
-  .add-title {
-    font-size: 16px; /* Smaller title for very small screens */
-  }
+.scholar_cancel_btn {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-  .custom-input {
-    padding: 10px; /* Increase padding for better touch targets */
-  }
+.scholar_cancel_btn:hover {
+  background: #f8fafc;
+  color: #1a2b4b;
+}
 
-  .add-form button {
-    padding: 12px; /* Increase button padding */
-  }
+/* Chrome/Safari styles for number input arrows */
+.scholar_input::-webkit-outer-spin-button,
+.scholar_input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

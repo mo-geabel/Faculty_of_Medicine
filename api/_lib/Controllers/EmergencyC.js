@@ -4,12 +4,9 @@ import Emergency from "../Modules/EmergencyModule.js";
 const getEmergency = async (req, res) => {
   try {
     const response = await Emergency.find();
-    if (response.length === 0) {
-      return res.status(404).json({ message: "there is no cases in DB" });
-    }
     res.status(200).json(response);
   } catch (error) {
-    res.status(404).json({ message: error });
+    res.status(500).json({ message: "Error fetching emergency records", error: error.message });
   }
 };
 const createEmergency = async (req, res) => {

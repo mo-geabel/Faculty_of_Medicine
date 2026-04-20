@@ -220,85 +220,116 @@ const Assistant = ({ userRole, setAssistants }) => {
   };
 
   return (
-    <>
+    <div className="assistant_collective_page">
       <Hero
         photo={assistant_photo}
-        title="Meet Our Pediatric Assistants"
-        txt_btn="Assistant Directory"
+        title="The Academic Collective"
+        subtitle="Meet the dedicated assistants supporting the next generation of medical excellence."
+        txt_btn="Explore the Network"
         onclick={scrollToSection}
       />
-      <div className="general">
-        <div className="assistant-container">
-          <div className="assistant">
-            <div className="assistant-title">
-              <p>Here are our assistants</p>
-            </div>
-            <div className="assistant-list">
-              {filteredAssistants
-                ? filteredAssistants.map((assistant) => (
-                    <div key={assistant._id} className="assistant-card">
-                      <img src={a_logo} alt={assistant.name} />
-                      <p>Name: {assistant.name}</p>
-                      <div className="car-button">
-                        <button onClick={() => openModal(assistant)}>
-                          View Details
-                        </button>
-                        {userRole === 0 && (
-                          <>
-                            <button onClick={() => handleEdit(assistant._id)}>
-                              Edit
-                            </button>
-                            <button onClick={() => handleDelete(assistant._id)}>
-                              Delete
-                            </button>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  ))
-                : "No Assistant is Created"}
-            </div>
-            <Pop
-              isOpen={isModalOpen}
-              onClose={closeModal}
-              assistant={selectedAssistant}
-            />
-          </div>
 
-          <div className="L-bar">
-            <div className="search">
-              <div className="search-title">
-                <p>Search</p>
-              </div>
+      {/* SECTION 1: SEARCH HUB (PROMINENT GATEWAY) */}
+      <section className="collective_search_hub section_padding">
+        <div className="section_container">
+          <div className="registry_gate_hub">
+            <div className="compact_search_bar">
               <input
                 type="text"
-                placeholder="Search assistants..."
+                placeholder="Search the Collective..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            {(userRole === 0 || userRole === 1) && (
-              <div className="LC">
-                <Link id="L-Calendar" to="/calendar">
-                  Calendar
-                </Link>
-              </div>
-            )}
-            {userRole === 0 && (
-              <div className="add-assistant">
-                <p>Add Assistant</p>
-                <AssistantForm
-                  addAssistant={addAssistant}
-                  assistant={currentAssistant}
-                  updateAssistant={updateAssistant}
-                  handleCancelEdit={handleCancelEdit} // Pass the cancel function
-                />
-              </div>
-            )}
           </div>
         </div>
+      </section>
+
+      <div className="collective_layout_container">
+        <div className="collective_main_workspace">
+          {/* SECTION 2: THE EXPLORER (GRID) */}
+          <section className="collective_explorer">
+            <div className="section_container">
+              <div className="explorer_grid">
+                {filteredAssistants.length > 0 ? (
+                  filteredAssistants.map((assistant) => (
+                    <div key={assistant._id} className="scholar_glass_card animate_fade">
+                      <div className="scholar_card_header">
+                        <div className="scholar_avatar">
+                          <img src={a_logo} alt={assistant.name} />
+                          <div className="avatar_glow"></div>
+                        </div>
+                        <div className="scholar_rank">Academic Assistant</div>
+                      </div>
+                      
+                      <div className="scholar_card_body">
+                        <h3 className="scholar_name">{assistant.name}</h3>
+                        <p className="scholar_specialty">Medical Sciences Division</p>
+                      </div>
+
+                      <div className="scholar_card_footer">
+                        <button className="scholar_action_btn view" onClick={() => openModal(assistant)}>
+                          Academic Bio
+                        </button>
+                        
+                        {(userRole === 0 || userRole === 1) && (
+                          <div className="scholar_admin_actions">
+                            <button className="scholar_mini_btn edit" onClick={() => handleEdit(assistant._id)}>
+                              Edit
+                            </button>
+                            <button className="scholar_mini_btn delete" onClick={() => handleDelete(assistant._id)}>
+                              Remove
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="empty_collective">
+                    <p>No scholars found matching your criteria.</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 3: MANAGEMENT BAR (ADMIN) */}
+          {(userRole === 0 || userRole === 1) && (
+            <aside className="collective_management_sidebar">
+               <div className="management_glass_box">
+                 <div className="management_box_header">
+                    <h4>Management Console</h4>
+                    {(userRole === 0 || userRole === 1) && (
+                      <Link className="calendar_trigger_link" to="/calendar">
+                         Open Faculty Calendar
+                      </Link>
+                    )}
+                 </div>
+
+                 {userRole === 0 && (
+                   <div className="add_scholar_section">
+                     <h5>{currentAssistant ? "Modify Scholar" : "Register New Scholar"}</h5>
+                     <AssistantForm
+                       addAssistant={addAssistant}
+                       assistant={currentAssistant}
+                       updateAssistant={updateAssistant}
+                       handleCancelEdit={handleCancelEdit}
+                     />
+                   </div>
+                 )}
+               </div>
+            </aside>
+          )}
+        </div>
       </div>
-    </>
+
+      <Pop
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        assistant={selectedAssistant}
+      />
+    </div>
   );
 };
 

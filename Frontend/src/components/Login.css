@@ -1,135 +1,214 @@
-/* General Body Styling */
-body {
+/* Login Redesign - Premium Glassmorphism */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+.login_cont {
   margin: 0;
   padding: 0;
-}
-
-/* Login Container Styling */
-.login_cont {
-  background-color: #136acec9;
-  display: flex;
-  flex-direction: column;
+  font-family: 'Inter', sans-serif;
   height: 100vh;
+  width: 100vw;
+  display: flex;
   justify-content: center;
   align-items: center;
+  background: url('../assets/login_bg.png') no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Login Box Styling */
-.login {
+/* Atmospheric Overlay */
+.login_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(19, 105, 206, 0.8) 0%, rgba(10, 50, 100, 0.9) 100%);
+  z-index: 1;
+}
+
+/* Glass Card */
+.glass_card {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  max-width: 440px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+  animation: fadeInDown 0.8s ease-out;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 90%; /* Ensure it fits well on mobile */
-  max-width: 400px; /* Max width for larger screens */
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0);
-  border-radius: 10px;
 }
 
-/* Logo Styling */
-.login img {
-  width: 60px;
+/* Header Sections */
+.login_header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.login_header img {
+  width: 70px;
   filter: brightness(0) invert(1);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
-/* Login Text and Links */
-.lg {
-  display: flex;
-  justify-content: center;
+.login_header img:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.login_header h1 {
+  color: #fff;
+  font-weight: 700;
+  font-size: 28px;
+  margin: 0 0 8px 0;
+}
+
+.login_header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Form Styling */
+.login_form {
   width: 100%;
 }
 
-.f_input p {
-  color: white;
-  cursor: pointer;
-  text-decoration: underline;
+.f_input {
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .f_input label {
-  color: white;
-  cursor: pointer;
+  display: block;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-/* Input Fields and Buttons Styling */
-.f_input button,
-input,
-optgroup,
-select,
-textarea {
+.f_input input {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 15px;
+  transition: all 0.3s ease;
   box-sizing: border-box;
-  font-family: inherit;
+}
+
+.f_input input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.f_input input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Button Styling */
+.login_btn {
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  border: none;
+  border-radius: 12px;
+  color: #1369ce;
   font-size: 16px;
-  line-height: inherit;
-  width: 100%; /* Full width inputs */
-  padding: 10px;
-  margin: 5px 0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-button {
-  background-color: #1369ce;
-  color: white;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #0b5ab3d7;
-}
-
-/* Error Message Styling */
-.error {
-  color: red;
-  font-size: 14px;
-  text-align: center;
+  transition: all 0.3s ease;
   margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  /* Adjust for tablet and smaller screens */
-  .login_cont {
-    padding: 20px;
-  }
+.login_btn:hover {
+  background: #f0f0f0;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
 
-  .login {
-    width: 95%; /* Adjust width for smaller screens */
-  }
+.login_btn:active {
+  transform: translateY(0);
+}
 
-  .f_input input,
-  .f_input button {
-    font-size: 14px; /* Adjust font size for inputs and button */
-  }
+/* Error Messages */
+.error_msg {
+  color: #ff6b6b;
+  font-size: 13px;
+  text-align: center;
+  margin-top: 15px;
+  background: rgba(255, 107, 107, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+}
 
-  .login img {
-    width: 50px; /* Adjust logo size */
-  }
+/* Footer Links */
+.login_footer {
+  margin-top: 25px;
+  text-align: center;
+}
 
-  .error {
-    font-size: 12px; /* Smaller font for error message */
+.visitor_link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.visitor_link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+/* Role Badge */
+.role_badge {
+  margin-top: 30px;
+  padding: 8px 16px;
+  background: rgba(19, 105, 206, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+/* Responsive Adjustments */
 @media (max-width: 480px) {
-  /* Adjust for mobile screens */
-  .login {
-    padding: 15px;
-    width: 100%; /* Make login box fill the screen */
+  .glass_card {
+    padding: 30px 20px;
+    width: 95%;
   }
-
-  .f_input input,
-  .f_input button {
-    font-size: 13px; /* Adjust font size for smaller screens */
-  }
-
-  .login img {
-    width: 40px; /* Smaller logo for mobile */
-  }
-
-  .error {
-    font-size: 12px; /* Even smaller font for error message */
+  
+  .login_header h1 {
+    font-size: 24px;
   }
 }

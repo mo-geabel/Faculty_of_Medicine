@@ -264,80 +264,132 @@ const Cal = ({ assistants, userRole, setAssistants }) => {
   if (userRole !== 0 && userRole !== 1) {
     navigate("/", { replace: true });
     return null;
-  }
-
-  return (
-    <>
-      <div className="calendar_container">
-        <div className="calendar_section">
-          <Calendar
-            onChange={handleDateChange}
-            value={selectedDate}
-            className="calendar"
-            tileContent={tileContent}
-          />
-          <div className="shifts">
-            <h3>Shifts for {selectedDate.toLocaleDateString()}</h3>
-            {renderShiftDetails(selectedShifts)}
+  }  return (
+    <div className="schedule_commander_page">
+      <div className="commander_workspace">
+        {/* LEFT PANE: CALENDAR CONTROL */}
+        <section className="calendar_pane">
+          <div className="glass_calendar_wrapper animate_fade">
+            <div className="calendar_header">
+              <span className="commander_tag">Faculty Schedule</span>
+              <h2 className="commander_title">Command Navigator</h2>
+            </div>
+            <Calendar
+              onChange={handleDateChange}
+              value={selectedDate}
+              className="commander_calendar"
+              tileContent={tileContent}
+            />
           </div>
-        </div>
+
+          {userRole === 0 && (
+            <div className="admin_shift_workspace animate_fade">
+              <div className="workspace_header">
+                <h3>Authorize New Shift</h3>
+                <p>Register official duty for verified assistants</p>
+              </div>
+              <form className="admin_duty_form" onSubmit={(e) => e.preventDefault()}>
+                <div className="form_group">
+                  <label>Assign Scholar</label>
+                  <select
+                    value={newShift.assistantId}
+                    onChange={(e) =>
+                      setNewShift({ ...newShift, assistantId: e.target.value })
+                    }
+                  >
+                    <option value="">Select Assistant</option>
+                    {Assistants.map((assistant) => (
+                      <option key={assistant._id} value={assistant._id}>
+                        {assistant.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form_group">
+                  <label>Service Department</label>
+                  <select
+                    name="department"
+                    value={newShift.department}
+                    onChange={handleNewShiftChange}
+                  >
+                    <option value="">Select Department</option>
+                    {departments.map((dep) => (
+                      <option key={dep} value={dep}>
+                        {dep}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form_group">
+                  <label>Reporting Time</label>
+                  <DatePicker
+                    selected={newShift.shiftStartTime}
+                    onChange={(date) =>
+                      setNewShift({ ...newShift, shiftStartTime: date })
+                    }
+                    showTimeSelect
+                    dateFormat="Pp"
+                    className="duty_datepicker"
+                  />
+                </div>
+
+                <button type="button" onClick={handleAddShift} className="push_duty_btn">
+                  Push to Schedule
+                </button>
+              </form>
+            </div>
+          )}
+        </section>
+
+        {/* RIGHT PANE: LIVE DUTY PANEL */}
+        <aside className="duty_panel">
+          <div className="panel_sticky_header">
+            <span className="duty_date">{selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span>
+            <h2 className="panel_title">Live Duty Registry</h2>
+          </div>
+
+          <div className="duty_list_scroll">
+            {selectedShifts.length > 0 ? (
+              selectedShifts.map((shift, index) => {
+                const assistant = Assistants.find((a) => a._id === shift.assistantId);
+                return (
+                  <div key={index} className="duty_glass_card animate_fade">
+                    <div className="duty_card_header">
+                      <span className="duty_dept_badge">{shift.department}</span>
+                      {userRole === 0 && (
+                        <button onClick={() => handleDeleteShift(shift)} className="duty_delete_btn" title="Remove Shift">
+                          ✕
+                        </button>
+                      )}
+                    </div>
+                    <div className="duty_card_body">
+                      <h4 className="assistant_name">{assistant ? assistant.name : "Unassigned"}</h4>
+                      <div className="duty_timing">
+                        <div className="time_block">
+                          <span className="time_label">IN</span>
+                          <span className="time_value">{new Date(shift.shiftStartTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                        <div className="time_divider"></div>
+                        <div className="time_block">
+                          <span className="time_label">OUT</span>
+                          <span className="time_value">{new Date(shift.shiftEndTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="empty_duty_state">
+                <p>No active duty registered for this date.</p>
+              </div>
+            )}
+          </div>
+        </aside>
       </div>
-      {userRole === 0 && (
-        <div className="add-shift-form">
-          <h3>Add a Shift</h3>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <label>
-              Assistant:
-              <select
-                value={newShift.assistantId}
-                onChange={(e) =>
-                  setNewShift({ ...newShift, assistantId: e.target.value })
-                }
-              >
-                <option value="">Select Assistant</option>
-                {Assistants.map((assistant) => (
-                  <option key={assistant._id} value={assistant._id}>
-                    {assistant.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Department:
-              <select
-                name="department"
-                value={newShift.department}
-                onChange={handleNewShiftChange}
-              >
-                <option value="">Select Department</option>
-                {departments.map((dep) => (
-                  <option key={dep} value={dep}>
-                    {dep}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label>
-              Shift Start Time:
-              <DatePicker
-                selected={newShift.shiftStartTime}
-                onChange={(date) =>
-                  setNewShift({ ...newShift, shiftStartTime: date })
-                }
-                showTimeSelect
-                dateFormat="Pp"
-              />
-            </label>
-
-            <button type="button" onClick={handleAddShift}>
-              Add Shift
-            </button>
-          </form>
-        </div>
-      )}
-    </>
+    </div>
   );
 };
 

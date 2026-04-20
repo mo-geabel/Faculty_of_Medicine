@@ -1,248 +1,296 @@
-.assistant-container {
-  display: flex;
-  max-width: 100%;
-  margin: 20px;
-  margin-top: 200px;
-  justify-content: space-between;
+:root {
+  --scholar-primary: #1369ce;
+  --scholar-bg: #f8fafc;
+  --scholar-glass: rgba(255, 255, 255, 0.8);
+  --scholar-border: rgba(19, 105, 206, 0.1);
+  --scholar-text: #1a2b4b;
+  --scholar-text-light: #64748b;
+  --scholar-accent: #3b82f6;
 }
 
-.assistant {
+/* Page Wrapper */
+.assistant_collective_page {
+  background-color: var(--scholar-bg);
+  min-height: 100vh;
+}
+
+/* Layout Container */
+.collective_layout_container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* 1. Compact Minimalist Search */
+.collective_search_hub {
+  margin-top: -25px;
+  position: relative;
+  z-index: 20;
   display: flex;
-  flex-direction: column;
-  max-width: 100%;
-  padding: 20px;
-  align-items: center;
-  height: fit-content;
-  background-color: white;
+  justify-content: center;
 }
-.assistant-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #1369ce;
-  text-transform: capitalize;
+
+.compact_search_bar {
+  width: 100%;
+  max-width: 320px; /* Much smaller */
 }
-.assistant-list {
-  display: flex;
-  max-width: 100%;
-  height: fit-content;
-  flex-wrap: wrap;
-  align-content: start;
-  justify-content: left;
-}
-.assistant-card {
-  background-color: white;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px;
-}
-.assistant-card p {
+
+.compact_search_bar input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.04);
+  font-size: 14px;
+  color: var(--scholar-text);
   font-weight: 500;
-  padding: 5px;
-}
-.add-assistant p {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  align-self: center;
-  color: #1369ce;
-  margin: 20px;
-}
-.assistant-card button {
-  border: none;
-  padding: 7px;
-  margin-top: 10px;
-  cursor: pointer;
-  color: aliceblue;
-  background-color: #1369ce;
-  border-radius: 10px;
-  transition: ease-in-out 0.3s;
-}
-.assistant-card button:hover {
-  transform: scale(1.1);
-}
-.L-bar {
-  width: 300px;
-  margin: 50px;
-  background-color: white;
-  height: fit-content;
-}
-.search {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-  border-bottom: 0.1px rgba(0, 0, 0, 0.1) solid;
-  width: 200px;
-}
-.search-title {
-  margin-bottom: 20px;
-  color: #1369ce;
-  font-size: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  font-family: inherit;
 }
 
-.search input {
-  border: none;
-  background-color: rgba(183, 183, 183, 0.275);
-  padding: 5px;
-  width: 10px;
-}
-.search input:hover,
-.search input:focus {
-  border: none;
+.compact_search_bar input:focus {
   outline: none;
+  background: white;
+  border-color: var(--scholar-primary);
+  box-shadow: 0 15px 35px rgba(19, 105, 206, 0.1);
+  max-width: 350px;
 }
 
-.car-button {
+/* 2. Workspace Layout */
+.collective_main_workspace {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 50px;
+  padding: 60px 0 100px;
+}
+
+/* 3. Explorer Grid */
+.explorer_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.scholar_glass_card {
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.scholar_glass_card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
+  border-color: var(--scholar-primary);
+}
+
+.scholar_card_header {
   display: flex;
   justify-content: space-between;
-  gap: 7px;
-}
-.calnder_container {
-  margin: 20px;
-  padding: 3px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.calnder_container1 {
-  margin: 20px;
-  padding: 3px;
-  width: 1000px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  align-items: center;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
-}
-.calnder h2 {
-  width: fit-content;
-  margin-left: 10px;
-  margin-bottom: 10px;
-  color: #1369ce;
+  align-items: flex-start;
+  margin-bottom: 25px;
 }
 
-.shift-details {
-  width: 450px;
-  margin: 30px;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
+.scholar_avatar {
+  position: relative;
+  width: 70px;
+  height: 70px;
 }
-.shift-details h3 {
-  color: #1369ce;
+
+.scholar_avatar img {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+  background: #f1f5f9;
 }
-.shifts {
+
+.avatar_glow {
+  position: absolute;
+  inset: -5px;
+  background: linear-gradient(135deg, var(--scholar-primary), #60a5fa);
+  border-radius: 24px;
+  opacity: 0.2;
+  filter: blur(8px);
+}
+
+.scholar_rank {
+  font-size: 10px;
+  font-weight: 800;
+  background: rgba(19, 105, 206, 0.05);
+  color: var(--scholar-primary);
+  padding: 6px 12px;
+  border-radius: 50px;
+  text-transform: uppercase;
+}
+
+.scholar_card_body {
+  margin-bottom: 30px;
+}
+
+.scholar_name {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--scholar-text);
+  margin-bottom: 6px;
+}
+
+.scholar_specialty {
+  font-size: 14px;
+  color: var(--scholar-text-light);
+  font-weight: 500;
+}
+
+/* Card Actions */
+.scholar_card_footer {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-}
-.calnder_container {
-  margin: 20px auto; /* Center the container horizontally */
-  padding: 3px;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  gap: 15px;
 }
 
-.calnder_container1 {
-  margin: 20px auto;
-  padding: 20px;
-  width: fit-content;
-  height: auto;
+.scholar_action_btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.scholar_action_btn.view {
+  background: var(--scholar-primary);
+  color: white;
+}
+
+.scholar_action_btn.view:hover {
+  background: #0e56aa;
+  box-shadow: 0 8px 20px rgba(19, 105, 206, 0.25);
+}
+
+.scholar_admin_actions {
   display: flex;
-  justify-content: center;
+  gap: 10px;
+}
+
+.scholar_mini_btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid #edf2f7;
+  background: white;
+  color: var(--scholar-text);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.scholar_mini_btn:hover {
+  background: #f8fafc;
+}
+
+.scholar_mini_btn.delete:hover {
+  background: #fffafa;
+  color: #ef4444;
+  border-color: #fecaca;
+}
+
+/* 4. Management Sidebar */
+.collective_management_sidebar {
+  position: sticky;
+  top: 120px;
+  height: fit-content;
+}
+
+.management_glass_box {
+  background: white;
+  border-radius: 30px;
+  padding: 35px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.management_box_header {
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.management_box_header h4 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--scholar-text);
+  margin-bottom: 12px;
+}
+
+.calendar_trigger_link {
+  display: block;
+  font-size: 13px;
+  color: var(--scholar-primary);
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.2s;
+}
+
+.calendar_trigger_link:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}
+
+.add_scholar_section h5 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--scholar-text);
+  margin-bottom: 20px;
+  display: flex;
   align-items: center;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 8px;
+}
+
+.add_scholar_section h5::before {
+  content: '';
+  width: 4px;
+  height: 15px;
+  background: var(--scholar-primary);
   border-radius: 10px;
 }
 
-.react-calendar {
-  border: none;
-  font-family: Arial, sans-serif;
-  width: 100%;
-}
-
-.react-calendar__tile {
-  padding: 10px;
-  margin: 3px;
-  background: #f7f9fc;
-  color: #000000;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.react-calendar__tile:enabled:hover,
-.react-calendar__tile--active {
-  background-color: #212222; /* Highlight color */
-  color: #030303; /* White text for contrast */
-  font-weight: bold;
-}
-
-.shift-indicator {
-  color: #000000; /* Match theme color */
-  font-size: 0.9em;
+/* Empty State */
+.empty_collective {
+  grid-column: 1 / -1;
   text-align: center;
-}
-.react-calendar__navigation__arrow.react-calendar__navigation__arrow--prev,
-.react-calendar__navigation__arrow.react-calendar__navigation__arrow--next {
-  color: black; /* Change arrow color to black */
+  padding: 80px;
+  background: white;
+  border-radius: 30px;
+  border: 2px dashed #e2e8f0;
 }
 
-.react-calendar__navigation__label {
-  color: black; /* Change month name color to black */
+.empty_collective p {
+  color: var(--scholar-text-light);
+  font-weight: 600;
 }
-.react-calendar__navigation button {
-  color: black; /* Change the color of the arrows to black */
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .collective_main_workspace {
+    grid-template-columns: 1fr;
+    padding-top: 40px;
+  }
 }
-#L-Calendar {
-  display: flex;
-  text-decoration: none;
-  text-underline-offset: none;
-  margin-top: 20px;
-  text-align: center;
-  margin-left: 20px;
-  padding: 20px;
-  border-bottom: #00000018 1px solid;
-}
+
 @media (max-width: 768px) {
-  .assistant-container {
-    flex-direction: column; /* Stack the elements vertically */
-    align-items: center; /* Center align the content */
-    margin: 10px; /* Reduce margin */
-  }
-
-  .L-bar {
-    flex-direction: column;
-    width: 90%; /* Full width for sidebar */
-    margin: 20px 0; /* Add margin for spacing */
-  }
-
-  .assistant-title {
-    font-size: 18px; /* Smaller title font size */
-  }
-
-  .assistant-card {
-    width: 90%; /* Full width for assistant cards */
-    margin: 10px 0; /* Add margin for spacing */
-  }
-
-  .assistant-card button {
-    width: 30%; /* Full width buttons */
-    padding: 10px; /* Increase padding for better touch targets */
-  }
-
-  .calnder_container1 {
-    width: 100%; /* Full width for calendar container */
-    margin-top: 20px; /* Spacing above the calendar */
-  }
-
-  .calnder {
-    width: 100%; /* Full width calendar */
-  }
+  .collective_layout_container { padding: 0 20px; }
+  .explorer_grid { grid-template-columns: 1fr; }
 }

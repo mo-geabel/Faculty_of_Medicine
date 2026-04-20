@@ -11,16 +11,18 @@ import { jwtDecode } from "jwt-decode";
 const Nav = ({ setUserRole, userRole }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuClick, setMenuClick] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // New state for dropdown
   const [newPassword, setNewPassword] = useState(""); // State for new password
   const location = useLocation();
   const { Members, dispatch } = useMemberhook();
-  const isSpecificPage = location.pathname === "/calendar";
+  const isQuizPage = location.pathname === "/quizz"; // New condition
+  const isSpecificPage = location.pathname === "/calendar" || isQuizPage;
   const { User, dispatch: disUser } = useLoginhook();
   const { Assistant, dispatch: disAssistant } = useAssistanthook();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.pageYOffset > 700);
+      setIsScrolled(window.pageYOffset > 50); // Faster sticky transition
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -36,8 +38,10 @@ const Nav = ({ setUserRole, userRole }) => {
 
   const handleLogout = () => {
     localStorage.removeItem("user");
+    disUser({ type: "LOGOUT" });
     setUserRole(null);
-    setMenuClick(!menuClick);
+    setMenuClick(false);
+    setDropdownOpen(false);
   };
 
   const handlePasswordChange = async () => {
@@ -46,140 +50,86 @@ const Nav = ({ setUserRole, userRole }) => {
       return;
     }
 
-    // Update in assistants array
-    if (userRole === 1) {
+    try {
       const decoded = jwtDecode(User.token);
+      const url = userRole === 1 
+        ? `${import.meta.env.VITE_URL}/assistant/${decoded._id}`
+        : `${import.meta.env.VITE_URL}/Members/${decoded._id}`;
 
-      const response = await fetch(
-        `${import.meta.env.VITE_URL}/assistant/${decoded._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password: newPassword }),
-        }
-      );
-      dispatch({
-        type: "UPDATE_Assistants",
-        payload: {
-          data: response,
-          _id: decoded._id,
-        },
+      const response = await fetch(url, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: newPassword }),
       });
-    }
-    if (userRole === 0) {
-      // Update in Members array
-      const decoded = jwtDecode(User.token);
 
-      const response = await fetch(
-        `${import.meta.env.VITE_URL}/Members/${decoded._id}`,
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ password: newPassword }),
-        }
-      );
-      dispatch({
-        type: "UPDATE_Members",
-        payload: {
-          data: response,
-          _id: decoded._id,
-        },
-      });
-    }
+      if (!response.ok) throw new Error("Failed to update password");
 
-    alert("Password updated successfully!");
-    setNewPassword(""); // Clear input
+      alert("Password updated successfully!");
+      setNewPassword("");
+    } catch (err) {
+      alert("Error updating password: " + err.message);
+    }
   };
 
   return (
-    <div className={isScrolled || isSpecificPage ? "container1" : "hidde"}>
-      <div className="logo">
-        <Link to="/">
-          <img onClick={toggleMenu2} src={logo} alt="logo" />
-        </Link>
-      </div>
-      <img onClick={toggleMenu} className="men" src={menu} alt="menu icon" />
-      <ul className={`menu-content ${menuClick ? "show" : ""}`}>
-        <Link to="/assistant" onClick={toggleMenu}>
-          <li>Assistant</li>
-        </Link>
-        <Link to="/faculty-member" onClick={toggleMenu}>
-          <li>Faculty Member</li>
-        </Link>
-        <Link to="/department-info" onClick={toggleMenu}>
-          <li>Department Info</li>
-        </Link>
-        <Link to="/announcement" onClick={toggleMenu}>
-          <li>Announcement</li>
-        </Link>
-        <Link to="/emergency" onClick={toggleMenu}>
-          <li>Emergency</li>
-        </Link>
-        {(userRole === 1 || userRole === 0) && (
-          <Link to="/quizz" onClick={toggleMenu}>
-            <li>Quizz</li>
+    <nav className={`navbar_main ${isScrolled || isSpecificPage ? "scrolled" : ""}`}>
+      <div className="nav_container">
+        <div className="nav_logo">
+          <Link to="/" onClick={toggleMenu2}>
+            <img src={logo} alt="Faculty Logo" />
+            <span className="logo_text">Medicine Portal</span>
           </Link>
-        )}
-        {userRole === 1 || userRole === 0 ? (
-          <div className="dropdown mt-4">
-            <button
-              className="btn btn-primary dropdown-toggle"
-              type="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {User.email}
-            </button>
-            <ul className="dropdown-menu dropdown-menu-dark">
-              <li>
-                <a
-                  className="btn btn-primary"
-                  data-bs-toggle="collapse"
-                  href="#collapseExample"
-                  role="button"
-                  aria-expanded="false"
-                  aria-controls="collapseExample"
-                  onClick={(e) => e.stopPropagation()} // Prevent dropdown from closing
-                >
-                  Change Password
-                </a>
-                <div className="collapse" id="collapseExample">
-                  <div className="card p-2">
+        </div>
+
+        <div className="mobile_toggle" onClick={toggleMenu}>
+          <div className={`hamburger ${menuClick ? "active" : ""}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+
+        <ul className={`nav_menu ${menuClick ? "active" : ""}`}>
+          <li className="nav_item"><Link to="/assistant" onClick={toggleMenu}>Assistant</Link></li>
+          <li className="nav_item"><Link to="/faculty-member" onClick={toggleMenu}>Faculty Member</Link></li>
+          <li className="nav_item"><Link to="/department-info" onClick={toggleMenu}>Info</Link></li>
+          <li className="nav_item"><Link to="/announcement" onClick={toggleMenu}>Announcements</Link></li>
+          <li className="nav_item"><Link to="/emergency" onClick={toggleMenu}>Emergency</Link></li>
+          {(userRole === 1 || userRole === 0) && (
+            <li className="nav_item"><Link to="/quizz" onClick={toggleMenu}>Quizz</Link></li>
+          )}
+          
+          <li className="nav_user_segment">
+            {User && User.email ? (
+              <div className={`user_profile ${dropdownOpen ? "open" : ""}`}>
+                <div className="user_trigger" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                  <span className="user_email">{User.email}</span>
+                </div>
+                <div className="user_dropdown">
+                  <div className="pw_change_box">
                     <input
                       type="password"
                       value={newPassword}
                       onChange={(e) => setNewPassword(e.target.value)}
-                      placeholder="Enter new password"
-                      className="form-control mb-2"
+                      placeholder="New Password"
                     />
-                    <button
-                      className="btn btn-success"
-                      onClick={handlePasswordChange}
-                    >
-                      Save Password
-                    </button>
+                    <button onClick={handlePasswordChange}>Change</button>
                   </div>
+                  <button className="logout_btn" onClick={handleLogout}>Logout Account</button>
                 </div>
-              </li>
-              <li
-                style={{ fontSize: "18px", cursor: "pointer" }}
-                onClick={handleLogout}
-              >
-                Logout
-              </li>
-            </ul>
-          </div>
-        ) : (
-          <Link to="/login" onClick={toggleMenu}>
-            <li>Login</li>
-          </Link>
-        )}
-      </ul>
-    </div>
+              </div>
+            ) : (
+              <div className="login_action_box">
+                <Link to="/login" className="portal_access_btn" onClick={toggleMenu}>
+                  <span className="btn_glow"></span>
+                  <span className="btn_text">Sign In</span>
+                </Link>
+              </div>
+            )}
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 

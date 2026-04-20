@@ -196,6 +196,7 @@ function App() {
           path="/quizz"
           element={
             <>
+            <Blank/>
               <Quizz userRole={userRole} />
               <Blank />
               <Footer />
