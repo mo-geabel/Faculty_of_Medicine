@@ -26,15 +26,15 @@ npm run dev
 🔑 Login Credentials
 
 👨‍⚕️ Assistant Account
-Email: mohamedgabel1@gmail.com
-Password: Bngeabel098)(*
+Email: moh.assistant@faculty.edu
+Password: Pass@1234
 
 👨‍🎓 Member Account
-Email: ethan.harris@medicaluniversity.edu
-Password: Bngeabel098)(*
+Email: moh.member@faculty.edu
+Password: Pass@1234
 
+💡 Note: These accounts are research/default accounts created during seeding.
 
-💡 Note: Replace these credentials with actual data from the database.
 
 ## 🛠️ Tech Stack
 

@@ -35,29 +35,39 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use("/", router);
-app.use("/emergency", EmergencyRouter);
-app.use("/members", MembersRouter);
-app.use("/assistant", AssistantRouter);
-app.use("/login", LoginRouter);
-
 // MongoDB Connection
 const PORT = process.env.PORT || 5000;
-mongoose
-  .connect(process.env.MONGODB_URL)
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
-  })
-  .catch((error) => {
-    console.error("❌ MongoDB connection error:", error);
-  });
 
-// Serve frontend static files
-app.use(express.static(path.join(__dirname, "../Frontend/dist")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../Frontend/dist", "index.html"));
+let isConnected = false;
+const connectDB = async () => {
+  if (isConnected) return;
+  try {
+    await mongoose.connect(process.env.MONGODB_URL);
+    isConnected = true;
+    console.log("✅ Connected to MongoDB");
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error);
+  }
+};
+
+// Middleware to ensure DB connection
+app.use(async (req, res, next) => {
+  await connectDB();
+  next();
 });
+
+// Routes
+app.use("/api", router);
+app.use("/api/emergency", EmergencyRouter);
+app.use("/api/members", MembersRouter);
+app.use("/api/assistant", AssistantRouter);
+app.use("/api/login", LoginRouter);
+
+// Local server (only if not on Vercel)
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+}
+
+export default app;
